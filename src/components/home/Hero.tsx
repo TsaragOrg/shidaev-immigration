@@ -43,15 +43,17 @@ export default function Hero({ lang }: LangProps) {
         <picture>
           <source
             media="(max-width: 640px)"
-            srcSet="/photos/shidaev-mobile-hero.png"
+            srcSet="/photos/shidaev-mobile-hero-800.webp 800w, /photos/shidaev-mobile-hero-1200.webp 1200w"
+            sizes="100vw"
+            type="image/webp"
           />
           <Image
             src="/photos/shidaev-black-hero.png"
             alt={t.photoAlt}
             width={1536}
             height={1024}
-            priority
             fetchPriority="high"
+            sizes="100vw"
           />
         </picture>
         <div className="hero-overlay" aria-hidden="true"></div>

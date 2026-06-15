@@ -39,7 +39,7 @@
   }
   .story-photo img {
     object-position: center center;  /* mobile использует отдельное фото
-                                        shidaev-about-mobile.png — уже скадрировано */
+                                        WebP variants — уже скадрированы */
   }
   /* Mobile badge — magazine asymmetric overlay: НА нижнем-левом углу
      фото (overlap, не за пределами). Сидит на фото снизу, торчит

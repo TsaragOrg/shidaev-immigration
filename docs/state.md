@@ -18,6 +18,13 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-06-15 — Mobile hero/about images optimized
+
+- **Что меняла:** Заменила прямые mobile `srcSet` на lightweight WebP variants: `shidaev-mobile-hero-800/1200.webp` и `shidaev-about-mobile-800/1200.webp`. Удалила старые PNG `shidaev-mobile-hero.png` (7.0 MB) и `shidaev-about-mobile.png` (3.3 MB), которые браузер скачивал напрямую мимо `next/image`. Убрала `priority` preload с desktop fallback hero image, чтобы mobile не запрашивал лишнюю desktop-картинку.
+- **На что опиралась:** `src/components/home/Hero.tsx`, `src/components/pages/AboutPage.tsx`, размеры файлов в `public/photos/`, mobile CSS в `src/styles/18-hero-mobile.css` и `src/styles/06-story.css`.
+- **Что НЕ затронуло:** Desktop hero image, текст RU/EN, layout секций, Sanity images, legal/compliance pages.
+- **Открытые вопросы:** нет. Ожидаемый эффект: mobile hero скачивает ~13-25 KB WebP вместо 7.0 MB PNG; about mobile скачивает ~18-30 KB WebP вместо 3.3 MB PNG.
+
 ### 2026-06-15 — Публичные интеграционные URL вынесены в config
 
 - **Что меняла:** Добавила `src/lib/site-config.ts` как единый источник для `NEXT_PUBLIC_SITE_URL`, контактных ссылок, адреса, соцсетей, Google Reviews URL, Google Maps iframe, hero fallback image и `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`. Подключила config в Header, Footer, ContactPage, FinalCTA, Reviews, Adversarial, sitemap, robots, metadata, Article JSON-LD и Attorney JSON-LD.

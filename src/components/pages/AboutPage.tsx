@@ -153,7 +153,9 @@ export default function AboutPage({ lang }: LangProps) {
                   <picture>
                     <source
                       media="(max-width: 768px)"
-                      srcSet="/photos/shidaev-about-mobile.png"
+                      srcSet="/photos/shidaev-about-mobile-800.webp 800w, /photos/shidaev-about-mobile-1200.webp 1200w"
+                      sizes="100vw"
+                      type="image/webp"
                     />
                     <Image
                       src="/photos/hero.jpg"
