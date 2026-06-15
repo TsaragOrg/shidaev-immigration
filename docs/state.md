@@ -18,6 +18,13 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-06-15 — Sanity launch error + image-url warning
+
+- **Что меняла:** Исправила импорт `@sanity/image-url` в `src/sanity/lib/image.ts`: deprecated default export заменён на named export `createImageUrlBuilder`.
+- **На что опиралась:** `docs/spec.md` § 6/11, `docs/04-функции/блог.md`, `docs/04-функции/seo.md`, `.env.local`, `.next/dev/logs/next-development.log`, `src/sanity/env.ts`, `src/sanity/lib/client.ts`, `src/sanity/lib/image.ts`.
+- **Что НЕ затронуло:** Sanity dataset/project ID, GROQ-запросы, схемы Studio, контент блога, маршруты `/blog` и `/studio`.
+- **Открытые вопросы:** нет. Ошибка `Dataset "productionposts" not found` была от старого значения env в запущенном dev server; текущий `.env.local` содержит `NEXT_PUBLIC_SANITY_DATASET=production`, локальная главная отвечает `200 OK`.
+
 ### 2026-06-06 — Реверс-индекс строк в design-system.md
 
 - **Что меняла:** В `.claude/rules/design-system.md` добавила колонку «Характерные строки» к таблице секций. Для каждой секции — 1-3 уникальные фразы из реального кода. Особо выделено: «Trial-Trained» / «С судебным опытом» → story-badge на About (НЕ Hero). В Матрице задач AGENTS.md добавила первый шаг «искать строку в design-system.md колонке "Характерные строки"».
