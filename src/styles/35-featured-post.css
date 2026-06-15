@@ -1,0 +1,178 @@
+/* ============================================================
+   FEATURED POST — большой блок свежей статьи
+   Используется на главной (Journal) и как первая на /blog.
+
+   Адаптивная: с coverImage — фото слева + текст справа.
+   Без — только текст крупно. */
+
+/* Featured post — крупный блок «свежая статья».
+   Два варианта вёрстки решают разные задачи:
+   - has-cover: фото слева + текст справа (2-кол grid)
+   - no-cover: один блок на всю ширину с акцентной полоской сверху
+     и крупным заголовком — чтобы без фото блок не выглядел как
+     мелкая карточка списка. UI должен быть «осмысленно featured»
+     в обоих случаях. */
+.featured-post {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+  position: relative;
+}
+
+.featured-post.has-cover {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+}
+
+/* Без фото — акцентная бронзовая полоска сверху, заметный сигнал
+   «это главное». Аналог editorial sites (FT, The Atlantic). */
+.featured-post.no-cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .featured-post.has-cover { grid-template-columns: 1fr; }
+}
+
+@media (hover: hover) {
+  .featured-post:hover { border-color: var(--accent); }
+  .featured-post:hover .featured-post-title { color: var(--bronze-deep, #8E7338); }
+}
+
+.featured-post-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-soft, #F3F1EC);
+}
+
+.featured-post-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-post-body {
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  min-height: 0;
+}
+
+/* Без фото — больше воздуха: блок самостоятельный и должен дышать. */
+.featured-post.no-cover .featured-post-body {
+  padding: 56px 48px 44px;
+}
+
+.featured-post-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .featured-post-body { padding: 28px 24px; }
+  .featured-post.no-cover .featured-post-body { padding: 40px 24px 32px; }
+}
+
+.featured-post-meta {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+
+.featured-post-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.18;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Без фото — заголовок крупнее. Это компенсирует отсутствие
+   визуального якоря (картинки) и делает блок самостоятельным. */
+.featured-post.no-cover .featured-post-title {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.12;
+  max-width: 22ch;
+}
+
+.featured-post-deck {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0;
+  font-style: italic;
+}
+/* Mobile — lede обрезается до 3 строк через line-clamp. На узких
+   экранах длинный italic-параграф растягивается на 7-8 строк,
+   карточка становится непропорционально высокой. Editorial-стандарт:
+   на мобайле lede 2-3 строки, остальное «...» */
+@media (max-width: 640px) {
+  .featured-post-deck {
+    font-style: normal; /* italic на 14px кириллицы плохо читается */
+    font-size: 14.5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.featured-post.no-cover .featured-post-deck {
+  font-size: 17px;
+  max-width: 60ch;
+  margin-top: 4px;
+}
+
+/* CTA «Читать →» — прижата к низу карточки через margin-top:auto.
+   Тонкая линия сверху отделяет визуально от тела. Простая текстовая
+   стрелка → внутри строки, без SVG-анимации. */
+.featured-post-cta {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+  transition: color 0.2s ease;
+}
+/* В варианте с фото — CTA прижимается к низу карточки (чтобы
+   совпадать с низом фото). В no-cover карточка не имеет фото-якоря,
+   CTA остаётся сразу после deck с небольшим отступом — компактнее. */
+.featured-post.has-cover .featured-post-cta {
+  margin-top: auto;
+}
+@media (hover: hover) {
+  .featured-post:hover .featured-post-cta { color: var(--bronze-deep, #8E7338); }
+}
+
+/* ============================================================
+   /blog — wrap для featured (отступы между зонами) */
+
+.blog-featured-wrap {
+  margin-top: 48px;
+  max-width: 980px;
+}
+

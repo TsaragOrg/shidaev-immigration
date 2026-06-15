@@ -1,0 +1,443 @@
+/* ============================================================
+   HERO — full-bleed cinematic with glass card
+============================================================ */
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes bounceSubtle {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+@keyframes nav-item-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* HERO — mobile-first cinematic. Same composition all viewports.
+   Photo full-bleed across the whole hero. Glass card overlays content
+   at the bottom-left. Card grows wider with screen but never splits
+   the photo. */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: contrast(1.04) saturate(1.02);
+}
+/* Без синего тинта — оригинальные тона фото */
+.hero-bg::after { display: none; }
+/* Desktop: subtle zoom for cinematic feel */
+@media (min-width: 1024px) {
+  .hero-bg img { transform: scale(1.04); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    /* pure black on left, fading to photo on right */
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.98) 28%,
+      rgba(0, 0, 0, 0.78) 48%,
+      rgba(0, 0, 0, 0.32) 68%,
+      rgba(0, 0, 0, 0) 90%
+    ),
+    /* subtle vertical wash for depth */
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.08) 50%,
+      rgba(0, 0, 0, 0.45) 100%
+    );
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter) clamp(40px, 6vw, 80px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+/* Hero content sits directly on the dark photo — no card, no glass */
+.hero-card {
+  width: 100%;
+  max-width: 640px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  opacity: 0;
+  animation: slideUpFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+}
+
+.hero-card .eyebrow {
+  display: block;
+  margin-bottom: 16px;
+  color: #A8894A;
+}
+
+.hero-card h1 {
+  font-family: var(--serif);
+  font-size: clamp(34px, 6.5vw, 44px);
+  line-height: 1.18;
+  color: var(--white);
+  margin-bottom: 24px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  overflow-wrap: normal;               /* было break-word — давало ugly hyphens */
+  hyphens: none;                       /* без авто-переноса слов */
+}
+.hero-card h1 .italic-light {
+  font-weight: 500;                     /* как и весь h1 — единая толщина */
+}
+
+/* Subline под именем-h1 — серьёзный tagline, чуть крупнее body */
+.hero-card-tagline {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 400;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 12px;
+  margin-bottom: 24px;
+  max-width: 28ch;
+  letter-spacing: -0.005em;
+}
+.hero-card-lead {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.84);
+  margin-bottom: 28px;
+  max-width: 44ch;
+}
+.hero-card-lead em { color: #A8894A; }
+.hero-card-lead strong { color: var(--white); font-weight: 600; }
+
+.hero-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+  align-items: flex-start;
+}
+
+/* Primary CTA — белый pill с бронзовой обводкой и тёплым свечением */
+.btn-shimmer {
+  background: #FFFFFF;
+  animation: none;
+  color: #171717;
+  border: 1px solid #A8894A;
+  justify-content: center;
+  padding: 18px 28px;
+  box-shadow: 0 14px 36px -10px rgba(168, 137, 74, 0.32);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.btn-shimmer .arrow { color: #A8894A; transition: color 0.3s ease, transform 0.3s ease; }
+/* Hover — инверсия в бронзу + лёгкий lift */
+@media (hover: hover) {
+  .btn-shimmer:hover {
+    background: #A8894A;
+    border-color: #A8894A;
+    color: #FFFFFF;
+    box-shadow: 0 18px 44px -10px rgba(168, 137, 74, 0.55);
+    transform: translateY(-2px);
+  }
+  .btn-shimmer:hover .arrow { color: #FFFFFF; transform: translateX(4px); }
+}
+
+/* Secondary — text link with bronze underline */
+.btn-glass {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #A8894A;
+  color: var(--white);
+  padding: 14px 0;
+  border-radius: 0;
+}
+.btn-glass:hover {
+  background: transparent;
+  border-bottom-color: #C9A961;
+  color: #F5E9C8;
+}
+
+/* Phone button with WhatsApp icon + arrow indicator */
+.btn-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-icon-wa {
+  width: 18px;
+  height: 18px;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.btn-phone:hover .btn-icon-wa { color: var(--gold-cream); }
+.btn-phone .btn-phone-label { text-align: left; }
+.btn-phone .arrow {
+  font-family: var(--sans);
+  font-size: 18px;
+  color: var(--gold);
+  margin-left: auto;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  line-height: 1;
+}
+.btn-phone:hover .arrow { transform: translate(2px, 2px); color: var(--gold-cream); }
+@media (max-width: 639px) {
+  /* На mobile стрелка прижата к номеру, не отжимается к правому краю */
+  .btn-phone .arrow { margin-left: 10px; }
+  .btn-phone .btn-phone-label { flex: 0 0 auto; }
+}
+
+.hero-card-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+  padding-top: 0;
+  border-top: 0;
+}
+@media (min-width: 640px) {
+  .hero-card-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+  }
+}
+.hero-card-strip span {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  position: relative;
+}
+/* gold bullet separator between tags on tablet+ */
+@media (min-width: 640px) {
+  .hero-card-strip span + span::before {
+    content: "·";
+    color: var(--gold);
+    font-weight: 700;
+    margin-right: 28px;
+    margin-left: -28px;
+    transform: translateY(-1px);
+  }
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: slideUpFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+  opacity: 0;
+  /* decorative — не перехватывает hover/click с кнопок hero */
+  pointer-events: none;
+}
+.hero-scroll-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+  animation: bounceSubtle 2.2s infinite;
+}
+
+/* TABLET — wider headline, actions in row */
+@media (min-width: 640px) {
+  .hero { min-height: 680px; }
+  .hero-card {
+    max-width: 560px;
+  }
+  .hero-card h1 { font-size: clamp(40px, 5.4vw, 52px); line-height: 1.15; }
+  .hero-card-lead { font-size: 16px; }
+  .hero-card-actions { flex-direction: row; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .btn-shimmer { justify-content: center; }
+  .btn-glass { padding: 14px 0; }
+}
+
+/* DESKTOP HERO — FULL-BLEED B&W фото на весь экран, текст overlay слева */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 92vh;
+    display: block;
+    position: relative;
+    background: #161616;
+    overflow: hidden;
+  }
+  /* Photo full-bleed, абсолютно покрывает viewport */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hero-bg picture,
+  .hero-bg img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right 40%;        /* лицо выше в кадре */
+    transform: scale(1.00) translateX(8%);
+    transform-origin: right center;
+    filter: none;
+  }
+  /* Gradient overlay слева — text readability + warm glow за текстовым блоком */
+  .hero-overlay {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      /* warm bronze glow за текстом — мягкое свечение, разбивает пустоту */
+      radial-gradient(ellipse 55% 45% at 22% 62%, rgba(168, 137, 74, 0.07) 0%, rgba(168, 137, 74, 0) 70%),
+      linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 32%),
+      linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0) 78%);
+    pointer-events: none;
+  }
+
+  /* Text overlay в левой части — выровнено по container left edge.
+     Сбрасываем base max-width + margin auto, чтобы padding-left работал от viewport,
+     а не от центрированного контейнера (иначе offset удваивается). */
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    min-height: 92vh;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 80px;
+    padding-left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+    padding-right: clamp(40px, 5vw, 88px);
+    align-items: flex-start;
+  }
+  .hero-card {
+    max-width: 680px;                   /* было 540px — длинные слова не помещались */
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Скрытые на desktop: portrait, chip strip, phone-button */
+  .hero-portrait { display: none; }
+  .hero-card-strip { display: none; }
+  .hero-card-actions .btn-glass { display: none; }
+
+  /* Text — white на тёмной части фото */
+  .hero-card h1 {
+    color: var(--white);
+    font-size: clamp(52px, 4.8vw, 72px);    /* ещё крупнее по просьбе */
+    line-height: 1.12;                       /* было 1.08 — тесно для EB Garamond */
+    margin-bottom: 24px;
+    letter-spacing: 0;                       /* было -0.015em — буквы слипались */
+    font-weight: 450;                        /* немного тоньше на desktop (было 500) */
+  }
+  .hero-card-lead {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 20px;                        /* было 17 — мост между массивным h1 и кнопкой */
+    line-height: 1.5;
+    max-width: 44ch;
+    margin-bottom: 36px;
+  }
+  .hero-card-lead strong { color: var(--white); }
+  .hero-card-actions { margin-bottom: 0; }
+  .hero-card-actions .btn-shimmer {
+    background: #FFFFFF;
+    color: #171717;
+    border-color: #A8894A;
+    padding: 22px 44px;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+  }
+  .hero-card-actions .btn-shimmer:hover {
+    background: #A8894A;
+    border-color: #A8894A;
+    color: #FFFFFF;
+  }
+  .hero-card-actions .btn-shimmer .arrow { color: #A8894A; }
+  .hero-card-actions .btn-shimmer:hover .arrow { color: #FFFFFF; }
+  .hero-scroll { display: none; }
+}
+
+/* WIDE desktop — больше воздуха */
+@media (min-width: 1440px) {
+  .hero-card { max-width: 780px; }                            /* было 600px — даём слову место */
+  .hero-card h1 { font-size: clamp(64px, 4.4vw, 80px); }   /* ещё крупнее на широких */
+  .hero-inner {
+    padding-top: 140px;
+    padding-bottom: 100px;
+    padding-right: clamp(64px, 6vw, 112px);
+    /* padding-left наследуется из 1024+ — container-aligned */
+  }
+}
+
+/* Cyrillic in Bodoni is ~12-15% wider than Latin —
+   scale RU H1 down so "Иммиграционный суд." fits on one line.
+   Не сжимаем буквы (было letter-spacing -0.012em — слипалось), даём воздух
+   и больше межстрочного — kirillица читается просторнее. */
+:root[lang="ru"] .hero-card h1,
+[lang="ru"] .hero-card h1 {
+  letter-spacing: 0.005em;
+  line-height: 1.22;
+}
+@media (min-width: 1024px) {
+  :root[lang="ru"] .hero-card h1,
+  [lang="ru"] .hero-card h1 { font-size: clamp(42px, 4vw, 54px); line-height: 1.22; }
+}
+@media (min-width: 1440px) {
+  :root[lang="ru"] .hero-card h1,
+  [lang="ru"] .hero-card h1 { font-size: clamp(52px, 3.8vw, 64px); line-height: 1.2; }
+}
+

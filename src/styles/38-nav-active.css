@@ -1,0 +1,26 @@
+/* ============================================================
+   ACTIVE PAGE — подсветка текущей страницы в nav header
+
+   Брендовый бронзовый #A8894A — тот же что в brand-kicker.
+   Контрастный к обоим состояниям header'а (прозрачный над hero
+   и белый scrolled). Постоянное подчёркивание подтверждает выбор. */
+
+.site-header .nav a.is-active,
+.site-header.is-scrolled .nav a.is-active {
+  color: #A8894A;
+}
+
+/* Постоянное подчёркивание + бронзовый цвет линии. */
+.site-header .nav a.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+  background: #A8894A;
+}
+
+/* Mobile burger menu — тоже бронзовый */
+@media (max-width: 768px) {
+  .nav > a.is-active {
+    color: #A8894A;
+  }
+}
+

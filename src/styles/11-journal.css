@@ -1,0 +1,137 @@
+/* ============================================================
+   JOURNAL
+============================================================ */
+
+.journal {
+  background: var(--surface);
+  padding: var(--section-y) 0;
+}
+.journal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 48px;
+  max-width: 1240px;
+}
+.journal-head .journal-all { margin-bottom: 12px; }
+.journal-head .eyebrow { display: block; margin-bottom: 12px; }
+.journal-head h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+}
+.journal-all {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  border-bottom: 2px solid var(--bronze);
+  padding-bottom: 4px;
+}
+
+/* Журнал на главной — adaptive grid.
+   auto-fit + minmax: количество колонок зависит от количества
+   карточек. 1 карточка → 1 кол на всю ширину. 2 → 2 кол. 3 → 3 кол.
+   Не зашито «всегда 3» — иначе при 2 карточках они занимают ⅔ ширины
+   и композиция выглядит обрезанной.
+
+   minmax(300px, 1fr) даёт минимум 300px на карточку — гарантирует
+   что они не сжимаются до неочитаемости. В container 1080px:
+   - 1 карточка: 1080px (одна, на всю)
+   - 2 карточки: ~520px каждая
+   - 3 карточки: ~340px каждая
+
+   align-items: stretch (grid default) → все карточки одной высоты.
+   CTA «Читать» прижата к низу через margin-top:auto. */
+.journal-grid-cards {
+  display: grid;
+  /* minmax(300px, 460px) — карточка не растягивается шире 460px
+     даже когда статей мало. При 2 карточках они компактные, не
+     поглощают всю строку. При 3 — естественно ужимаются до ~390px
+     (трети 1240px). */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 460px));
+  gap: 40px 32px;
+  max-width: 1240px;
+  /* justify-content:start — карточки прижаты к левому краю.
+     align-items:start — карточки НЕ растягиваются до высоты самой
+     высокой, у каждой натуральная высота. Так CTA «Читать»
+     поднимается вместе с контентом, не висит внизу. */
+  justify-content: start;
+  align-items: start;
+}
+@media (max-width: 600px) {
+  .journal-grid-cards { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* Дубль ссылки «Все публикации»: на desktop она в журнальном header
+   справа сверху (.journal-all--desktop), на mobile прыгает под карточки
+   и становится по центру (.journal-all--mobile). По умолчанию мобильная
+   спрятана, на узких экранах desktop-версия скрывается. */
+.journal-all--mobile { display: none; }
+@media (max-width: 768px) {
+  .journal-all--desktop { display: none; }
+  .journal-all--mobile {
+    /* table — block-level элемент, который не растягивается на всю ширину
+       и центрируется через margin auto. Чище чем wrapper-div. */
+    display: table;
+    margin: 40px auto 0;
+  }
+}
+
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.journal-card {
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.35s ease, transform 0.35s ease;
+  cursor: pointer;
+}
+.journal-card:hover {
+  border-color: var(--bronze);
+  transform: translateY(-4px);
+}
+.journal-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.journal-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.4) contrast(1.05);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.journal-card:hover .journal-image img { transform: scale(1.04); filter: grayscale(0) contrast(1.05); }
+
+.journal-body { padding: 32px 28px; }
+.journal-card .journal-meta {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #A8894A;
+  margin-bottom: 14px;
+}
+.journal-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 500;
+  margin-bottom: 14px;
+  transition: color 0.3s ease;
+}
+.journal-card:hover h3 { color: var(--bronze-deep); }
+.journal-card p {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+

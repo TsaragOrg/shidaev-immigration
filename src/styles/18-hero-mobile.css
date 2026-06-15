@@ -1,0 +1,236 @@
+/* ============================================================
+   MOBILE HERO — FULL-BLEED COURTROOM + 70% DARK OVERLAY
+   Photo goes under fixed header, takes 100vh. White text on top.
+============================================================ */
+
+/* Hero-portrait — middle photo для mobile magazine layout. Скрыт на десктопе. */
+.hero-portrait { display: none; }
+
+/* hero-brand-stack — только на mobile, скрыт на desktop */
+.hero-brand-stack { display: none; }
+
+/* MOBILE + TABLET (до 1023) — белый header с тёмным текстом */
+@media (max-width: 1023px) {
+  .site-header {
+    position: sticky;
+    background: var(--white) !important;
+    border-bottom-color: transparent;
+    box-shadow: none;
+  }
+  .site-header.is-scrolled {
+    /* Без backdrop-filter — он ломал mobile burger menu
+       (создавал containing block для .nav fixed). */
+    background: rgba(255,255,255,0.96) !important;
+    box-shadow: 0 1px 0 var(--hairline);
+  }
+  .site-header .brand-name,
+  .site-header.is-scrolled .brand-name { color: var(--ink) !important; }
+  .site-header .brand-kicker,
+  .site-header.is-scrolled .brand-kicker { color: #A8894A !important; }
+  .site-header .nav a,
+  .site-header.is-scrolled .nav a { color: var(--slate) !important; }
+  .site-header .burger span,
+  .site-header.is-scrolled .burger span { background: var(--ink) !important; }
+  .site-header .header-phone .num,
+  .site-header.is-scrolled .header-phone .num { color: var(--ink) !important; }
+  .site-header .lang-switch button,
+.site-header .lang-switch-current,
+.site-header .lang-switch-link,
+  .site-header.is-scrolled .lang-switch button,
+.site-header.is-scrolled .lang-switch-current,
+.site-header.is-scrolled .lang-switch-link { color: var(--slate) !important; }
+  .site-header .lang-switch button.active,
+  .site-header.is-scrolled .lang-switch button.active,
+.site-header.is-scrolled .lang-switch-current { color: var(--ink) !important; border-bottom-color: var(--ink) !important; }
+}
+
+@media (max-width: 639px) {
+  /* MOBILE HERO — фото сверху, текст снизу (column normal) */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--white);
+    overflow: hidden;
+    position: relative;
+  }
+  /* Photo блок сверху — 48dvh (было 55dvh — CTA уходило за fold) */
+  .hero-bg {
+    display: block;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 48vh;
+    height: 48dvh;
+    z-index: 0;
+    overflow: hidden;
+    background: #161616;
+  }
+  .hero-bg picture,
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 12%;     /* лицо в кадр — было 25% (срезалось) */
+  }
+  /* Overlay не нужен — фото отдельно */
+  .hero-overlay { display: none; }
+
+  /* Hero-content — серый с warm undertone, гармонирует с бронзовым акцентом */
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 22px 24px 40px;
+    background: #FDFCFA;             /* warm near-white — еле уловимая теплота */
+  }
+  .hero-card {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  /* Header — sticky белый */
+  .site-header {
+    position: sticky;
+    padding: 14px 0;
+    background: var(--white);
+    border-bottom-color: transparent;
+    box-shadow: none;
+  }
+  .site-header.is-scrolled {
+    /* Без backdrop-filter — он создаёт containing block для .nav
+       (position: fixed) → mobile burger menu открывался невидимый
+       в зоне ~80px header'а. */
+    padding: 10px 0;
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 1px 0 var(--hairline);
+  }
+  /* Header text — white */
+  .site-header .brand-name { color: var(--white); }
+  .site-header .brand-kicker { color: #A8894A; }
+  .site-header .nav a { color: rgba(255,255,255,0.72); }
+  .site-header .burger span { background: var(--white); }
+  .site-header .header-phone .num { color: var(--white); }
+  .site-header .lang-switch button,
+  .site-header .lang-switch-current,
+  .site-header .lang-switch-link { color: rgba(255,255,255,0.72); }
+  .site-header .lang-switch button.active,
+  .site-header .lang-switch-current { color: #A8894A; border-bottom-color: #A8894A; }
+
+  /* Brand stack в hero (только mobile) — над h1, мини brand */
+  .hero-brand-stack {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    gap: 2px;
+    margin-bottom: 18px;
+  }
+  .hero-brand-stack .brand-kicker {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .hero-brand-stack .brand-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  /* Mobile — оставляем только полоску, kicker-текст скрываем (на мобиле лишний) */
+  .hero-card .eyebrow-line {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 10px;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    font-size: 0;                       /* прячем сам текст «Jacob Shidaev · …» */
+    line-height: 0;
+  }
+  .hero-card .eyebrow-line::before {
+    width: 32px;
+    flex-shrink: 0;
+    background: #A8894A;                /* бронзовая полоска остаётся */
+  }
+  .hero-card .eyebrow {
+    color: var(--slate);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    white-space: nowrap;
+  }
+  .hero-card h1 {
+    color: var(--ink);
+    font-size: 37px;
+    line-height: 1.14;
+    margin-bottom: 18px;
+    margin-top: 0;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+  }
+  .hero-card h1 em {
+    font-style: normal;                 /* swash italic выкл. — синтетический oblique сверху */
+    font-weight: 500;                   /* как и весь h1 — единая толщина */
+    color: var(--ink);
+    /* transform: skewX наследуется от глобального правила выше */
+  }
+  .hero-card-lead {
+    color: var(--slate);
+    font-size: 16px;
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+  .hero-card-lead em {
+    font-style: normal;                 /* убираем calligraphic italic */
+    color: #A8894A;
+  }
+  .hero-card-lead strong { color: var(--ink); }
+
+  .hero-portrait { display: none; }
+
+  /* Primary CTA — комфортный tap target (≥44px) */
+  .hero-card-actions { gap: 14px; margin-bottom: 0; margin-top: 4px; flex-direction: column; align-items: stretch; }
+  .hero-card-actions .btn-shimmer {
+    background: var(--noir);
+    border-color: var(--noir);
+    color: var(--white);
+    padding: 16px 22px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.25);
+    justify-content: center;
+  }
+  .hero-card-actions .btn-shimmer:hover {
+    background: #000;
+    border-color: #000;
+  }
+  .btn-glass {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--ink);
+    padding: 14px 0;
+    border-radius: 0;
+    text-align: center;
+    justify-content: center;
+  }
+  .btn-glass:hover {
+    background: transparent;
+    border-bottom-color: var(--ink);
+    color: var(--ink);
+  }
+  .btn-icon-wa { color: var(--ink); }
+  .btn-phone .arrow { color: var(--ink); }
+  .hero-card-strip { display: none; }
+
+  .hero-scroll { display: none; }
+}
+

@@ -1,0 +1,83 @@
+/* ============================================================
+   NOT FOUND — кастомная 404 страница
+============================================================ */
+
+.not-found {
+  padding: clamp(48px, 12vw, 120px) 0 80px;
+  background: var(--surface);
+  min-height: 60vh;
+}
+
+.not-found-container {
+  max-width: 720px;
+}
+
+.not-found-code {
+  font-family: var(--serif);
+  font-size: clamp(80px, 18vw, 180px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--rule);
+  margin: 0 0 40px;
+}
+
+.not-found-section {
+  margin-bottom: 56px;
+}
+
+.not-found-section:last-child {
+  margin-bottom: 0;
+  padding-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.not-found-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 36px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.not-found-title-en {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.5vw, 30px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.not-found-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+
+.not-found-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.not-found-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+@media (hover: hover) {
+  .not-found-link:hover { color: #A8894A; }
+}
+
+@media (max-width: 768px) {
+  .not-found { padding: 100px 0 64px; }
+}
+

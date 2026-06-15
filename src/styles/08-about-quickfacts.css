@@ -1,0 +1,40 @@
+/* ============================================================
+   ABOUT — QUICK-FACTS STRIP (внутри story-text, между H2 и прозой)
+   Точка решения: либо читать историю, либо прыгнуть к допускам.
+============================================================ */
+
+.about-quickfacts {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 1.2vw, 20px);
+  margin: 0 0 36px;
+  padding: 18px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.about-quickfacts li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+.about-quickfacts .qf-value {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1;
+  color: #A8894A;
+  letter-spacing: -0.01em;
+}
+.about-quickfacts .qf-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+  line-height: 1.4;
+  white-space: pre-line;   /* \n в строке рендерится как перенос */
+}

@@ -1,0 +1,59 @@
+/* ============================================================
+   SHIDAEV IMMIGRATION — CSS ENTRY POINT
+
+   Этот файл — только @import-ы. Все правила вынесены в src/styles/.
+
+   Гибрид стилей: CSS-split (этот файл + src/styles/*) ОСНОВА,
+   Tailwind v4 — параллельно для утилит в JSX.
+   Правила гибрида — src/styles/README.md.
+
+   Правила импортов:
+   - @import "tailwindcss" ВСЕГДА первой строкой (Tailwind layers).
+   - Дальше — секции в порядке номеров (00, 01, ... 41).
+   - НЕ менять порядок. Перестановка может перебить cascade
+     (особенно 16-responsive-global перебивает базовые стили 04-14,
+     18-hero-mobile перебивает 03-hero).
+   - Добавление новой секции: новый @import строго в позицию
+     где она существует в каскаде. Документировать почему.
+   ============================================================ */
+
+@import "tailwindcss";
+@import "../styles/00-tokens-base.css";
+@import "../styles/01-type-layout.css";
+@import "../styles/02-header.css";
+@import "../styles/03-hero.css";
+@import "../styles/04-practice-home.css";
+@import "../styles/05-adversarial.css";
+@import "../styles/06-story.css";
+@import "../styles/07-credentials.css";
+@import "../styles/08-about-quickfacts.css";
+@import "../styles/09-about-credentials.css";
+@import "../styles/10-reviews.css";
+@import "../styles/11-journal.css";
+@import "../styles/12-final-cta-home.css";
+@import "../styles/13-practice-page.css";
+@import "../styles/14-footer.css";
+@import "../styles/15-animations.css";
+@import "../styles/16-responsive-global.css";
+@import "../styles/17-intro.css";
+@import "../styles/18-hero-mobile.css";
+@import "../styles/19-touch-hover-reset.css";
+@import "../styles/20-contact-page.css";
+@import "../styles/21-intent-grid.css";
+@import "../styles/22-contact-secondary.css";
+@import "../styles/23-contact-channels.css";
+@import "../styles/24-final-cta-compact.css";
+@import "../styles/25-contact-booking.css";
+@import "../styles/26-contact-form-fallback.css";
+@import "../styles/27-final-cta-micro.css";
+@import "../styles/31-contact-channels-strip.css";
+@import "../styles/32-responsive-book-contact.css";
+@import "../styles/33-blog-index.css";
+@import "../styles/34-article.css";
+@import "../styles/35-featured-post.css";
+@import "../styles/36-blog-grid-medium.css";
+@import "../styles/37-bg-fix.css";
+@import "../styles/38-nav-active.css";
+@import "../styles/39-about-cta.css";
+@import "../styles/40-not-found.css";
+@import "../styles/41-legal.css";

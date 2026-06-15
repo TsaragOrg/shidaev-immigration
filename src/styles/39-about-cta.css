@@ -1,0 +1,33 @@
+/* ============================================================
+   ABOUT — CTA-секция перед футером (мостик к /contact)
+============================================================ */
+
+.about-cta {
+  padding: clamp(64px, 8vw, 96px) 0;
+  background: var(--surface-alt);
+}
+
+.about-cta-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-cta-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.about-cta-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0 auto 28px;
+  max-width: 52ch;
+}
+

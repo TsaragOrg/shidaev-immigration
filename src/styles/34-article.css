@@ -1,0 +1,431 @@
+/* ============================================================
+   ARTICLE — отдельная страница статьи
+============================================================ */
+
+.article {
+  padding: 120px 0 80px;
+  background: var(--surface);
+}
+
+.article-container {
+  max-width: 720px;
+}
+
+.article-back {
+  font-family: var(--sans);
+  font-size: 14px;
+  margin: 0 0 40px;
+}
+
+.article-back a {
+  color: var(--slate);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .article-back a:hover { color: var(--ink); }
+}
+
+.article-header {
+  margin-bottom: 48px;
+}
+
+.article-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 20px;
+}
+
+.article-eyebrow-cat { font-weight: 600; }
+.article-eyebrow-dot { color: var(--slate-soft); }
+
+.article-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 20px;
+  font-weight: 500;
+}
+
+.article-deck {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 24px);
+  line-height: 1.4;
+  color: var(--slate);
+  margin: 0;
+}
+
+.article-updated {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--slate-soft);
+  margin: 24px 0 0;
+}
+
+.article-cover {
+  margin: 0 0 48px;
+}
+
+.article-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Тело статьи — типография для длинного чтения */
+.article-body {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.5vw, 19px);
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.article-p {
+  margin: 0 0 24px;
+}
+
+.article-h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 48px 0 20px;
+}
+
+.article-h3 {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.2vw, 24px);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 36px 0 16px;
+}
+
+.article-blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 20px;
+  margin: 32px 0;
+  font-style: italic;
+  color: var(--slate);
+}
+
+.article-list,
+.article-list-ol {
+  margin: 0 0 24px;
+  padding-left: 24px;
+}
+
+.article-list li,
+.article-list-ol li {
+  margin-bottom: 10px;
+}
+
+.article-link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .article-link:hover {
+    color: var(--accent);
+  }
+}
+
+/* CUSTOM BLOCKS внутри статьи */
+
+/* Callout */
+.article-callout {
+  border-left: 3px solid var(--accent);
+  background: var(--surface-alt);
+  padding: 20px 24px;
+  margin: 32px 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.article-callout--warning { border-left-color: #c87a2c; }
+.article-callout--urgent { border-left-color: #b8392a; }
+.article-callout--deadline { border-left-color: #7a3a8e; }
+
+.article-callout-title {
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.article-callout-text {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* Pull quote */
+.article-pullquote {
+  margin: 56px 0;
+  padding: 0;
+  text-align: center;
+  border-left: 0;
+}
+
+.article-pullquote p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+
+.article-pullquote-attr {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  color: var(--slate);
+}
+
+/* Checklist */
+.article-checklist {
+  background: var(--surface-alt);
+  padding: 24px 28px;
+  margin: 32px 0;
+  font-family: var(--sans);
+}
+
+.article-checklist-title {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+
+.article-checklist-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article-checklist-items li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.article-checklist-items li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--accent);
+}
+
+/* Case reference */
+.article-case {
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  padding: 20px 24px;
+  margin: 32px 0;
+  display: block;
+  text-decoration: none;
+}
+
+.article-case--linked {
+  transition: border-color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .article-case--linked:hover {
+    border-color: var(--accent);
+  }
+}
+
+.article-case-citation {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.article-case-summary {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0;
+}
+
+/* Inline image */
+.article-figure {
+  margin: 40px 0;
+}
+
+.article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.article-figure-caption {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--slate);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* Article footer */
+.article-footer {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.article-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.article-author-photo {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.article-author-name {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--ink);
+}
+
+.article-author-role {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--slate);
+  margin: 4px 0 0;
+}
+
+.article-translation-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  margin: 0;
+}
+
+.article-translation-link a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Related */
+.article-related {
+  margin-top: 80px;
+  padding-top: 48px;
+  border-top: 1px solid var(--hairline);
+}
+
+.article-related-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 32px;
+}
+
+.article-related-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Mobile tuning */
+@media (max-width: 639px) {
+  .blog-index { padding: 48px 0 48px; }
+  .article { padding: 48px 0 48px; }
+  .article-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Journal — text-only вариант (без image, под подключение к Sanity).
+   Используется на главной когда секция показывает реальные статьи. */
+
+.journal-card--text {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  padding: 32px 28px;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+@media (hover: hover) {
+  .journal-card--text:hover {
+    border-color: var(--accent);
+    background: var(--surface-alt);
+  }
+}
+
+.journal-card--text .journal-body {
+  padding: 0;
+}
+
+.journal-card--text .journal-meta {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+.journal-card--text h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.journal-card--text p {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0;
+}
+

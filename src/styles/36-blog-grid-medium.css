@@ -1,0 +1,210 @@
+/* ============================================================
+   /blog — 2-колоночная сетка для статей с фото
+   После featured. На мобайле — 1 колонка. */
+
+.blog-grid-medium {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px 40px;
+  margin-top: 56px;
+  max-width: 980px;
+}
+
+@media (max-width: 768px) {
+  .blog-grid-medium { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* Карточка PostCardMedium — magazine-grid pattern.
+   Без full border — только 2px ink top + 1px hairline bottom.
+   Чистая editorial-рамка снизу/сверху, без бокового кадра.
+   Padding 28px по бокам в body — текст с инсетом, фото/kicker
+   идут edge-to-edge. Все карточки одинаковой высоты (grid stretch),
+   CTA «Читать» прижата к низу через margin-top:auto. */
+.post-medium {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  padding: 0 0 24px;
+  border-top: 2px solid var(--ink);
+}
+
+/* Body — flex колонка с CTA, прижатым к низу (margin-top:auto).
+   Padding только горизонтальный — фото/kicker extends edge-to-edge
+   карточки, текст вложен с инсетом. */
+.post-medium-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 0 28px;
+}
+/* Когда нет media-элемента сверху (no-cover, no-kicker) — body
+   первый ребёнок, нужен top padding чтобы eyebrow не прижался
+   к верхнему краю карточки. */
+.post-medium > .post-medium-body:first-child {
+  padding-top: 28px;
+}
+
+@media (hover: hover) {
+  .post-medium:hover { opacity: 0.85; }
+  .post-medium:hover .post-medium-title { color: var(--bronze-deep, #8E7338); }
+}
+
+.post-medium-title { transition: color 0.2s ease; }
+
+.post-medium-media {
+  overflow: hidden;
+  /* 16:9 — компактное editorial-соотношение (NYT, Bloomberg).
+     Фото не доминирует, текст получает больше визуального веса.
+     При 390px width — ~220px height. */
+  aspect-ratio: 16 / 9;
+  background: var(--surface-soft, #F3F1EC);
+  margin-bottom: 24px;
+}
+
+/* Kicker — типографическая плашка на месте фото для карточек без
+   cover. Тот же 4:5 ratio чтобы карточки выровнены по сетке.
+   Cream background + крупный сериф + подзаголовок с обрамляющими
+   золотыми линиями (или просто чёрточка под kicker если subtitle нет). */
+.post-medium-kicker {
+  /* Тот же 16:9 ratio что у photo — карточки выровнены по сетке. */
+  aspect-ratio: 16 / 9;
+  background: #F5EFE3; /* Тёплый cream */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  margin-bottom: 24px;
+  gap: 20px;
+}
+.post-medium-kicker-text {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(56px, 7vw, 80px);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  text-align: center;
+}
+/* Subtitle с обрамляющими золотыми линиями.
+   ━━ NOTICE TO APPEAR ━━ */
+.post-medium-kicker-sub {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 220px;
+}
+.post-medium-kicker-sub::before,
+.post-medium-kicker-sub::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #A8894A; /* card-gold — editorial-золото, не накладывается на site --accent */
+}
+.post-medium-kicker-subtitle {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #A8894A;
+  white-space: nowrap;
+}
+/* Когда subtitle нет — просто короткая линия под kicker'ом. */
+.post-medium-kicker-rule {
+  width: 48px;
+  height: 1px;
+  background: #A8894A;
+}
+
+.post-medium-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post-medium-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400; /* регулярный — bold только у категории */
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 18px; /* воздух перед title */
+  margin-bottom: 10px;
+}
+
+.post-medium-cat { font-weight: 600; }
+.post-medium-dot { color: var(--slate-soft); font-weight: 400; }
+.post-medium-date { color: var(--slate); font-weight: 400; }
+
+.post-medium-title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.4vw, 27px);
+  line-height: 1.28;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: #1F1F1F; /* dark ink, чуть мягче чёрного — как в референсе */
+  margin: 0 0 22px;
+  /* Magazine-grid: max 3 строки заголовка. 4-я обрезается «…».
+     Editorial-стандарт (Wired/FT). Сигнал автору «заголовок слишком
+     длинный — перепиши короче». Карточки одного размера в сетке. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-medium-deck {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Lede — 2-3 строки описания статьи. Берётся из excerpt, fallback
+   на deck. -webkit-line-clamp: 3 — стандартный паттерн truncation
+   многострочного текста. Поддерживается во всех современных
+   браузерах. */
+.post-medium-lede {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--slate);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* CTA «Читать» — inline-block, идёт сразу после lede.
+   Без margin-top:auto — кнопка поднимается вместе с текстом, не
+   прижимается к низу. На карточках без фото CTA визуально близко
+   к контенту, не висит внизу с пустотой над собой. */
+.post-medium-cta {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 24px;
+  transition: color 0.2s ease;
+}
+@media (hover: hover) {
+  .post-medium:hover .post-medium-cta {
+    color: #8E7338;
+  }
+}
+

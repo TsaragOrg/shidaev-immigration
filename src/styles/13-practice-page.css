@@ -1,0 +1,363 @@
+/* ============================================================
+   PRACTICE PAGE (/practice.html)
+============================================================ */
+
+.practice-page-intro {
+  background: var(--white);
+  padding: 140px 0 80px;   /* +20px воздуха под хедером на desktop */
+}
+.practice-intro-grid {
+  max-width: 880px;
+}
+.practice-intro-grid .eyebrow {
+  display: block;
+  margin-bottom: 20px;
+}
+.practice-intro-grid h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 48px);   /* было 40-68 → 28-48 — компактнее */
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 24px;                    /* было 28 */
+}
+.practice-intro-grid h1 em {
+  font-style: normal;                  /* synthetic oblique через transform — см. правило выше */
+  font-weight: 400;
+}
+.practice-intro-lead {
+  font-size: 16px;                       /* было 18 → 16 — пропорционально меньше */
+  line-height: 1.55;
+  color: var(--slate);
+  max-width: 720px;
+  margin-bottom: 32px;                   /* было 40 */
+}
+.practice-toc {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--hairline);
+}
+.practice-toc a {
+  display: block;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.3s ease, padding 0.3s ease;
+}
+.practice-toc a:nth-child(odd) {
+  padding-right: 24px;
+}
+.practice-toc a:nth-child(even) {
+  border-left: 1px solid var(--hairline);
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.practice-toc a:hover {
+  color: var(--slate);
+  padding-left: 8px;
+}
+.practice-toc a:nth-child(even):hover {
+  padding-left: 32px;
+}
+
+.practice-area {
+  background: var(--white);
+  padding: 96px 0;
+  border-top: 1px solid var(--hairline);
+}
+/* Removal Defense (03) — тёплый светло-серый фон для визуального
+   ритма (01 белый · 02 чёрный · 03 серый · 04 белый) */
+.practice-area#removal {
+  background: var(--surface-alt);
+}
+.practice-area-dark {
+  background: #161616;
+  color: rgba(255, 255, 255, 0.86);
+  border-top: none;
+}
+
+.area-head {
+  max-width: 860px;
+  margin-bottom: 56px;
+}
+.area-num {
+  display: block;
+  font-family: var(--serif);
+  font-size: 22px;             /* было 28 → 22 — заметно, но не громко */
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #A8894A;              /* бронзовый акцент */
+  margin-bottom: 16px;
+}
+.practice-area-dark .area-num {
+  color: rgba(255, 255, 255, 0.55);
+}
+.area-flag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 18px;
+}
+.area-head h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.practice-area-dark .area-head h2 { color: #fff; }
+.area-en {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--slate);
+  margin-bottom: 26px;
+}
+.practice-area-dark .area-en { color: rgba(255, 255, 255, 0.55); }
+.area-lead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--slate);
+  max-width: 720px;
+}
+.practice-area-dark .area-lead { color: rgba(255, 255, 255, 0.78); }
+
+.area-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-bottom: 56px;
+}
+.area-col h4 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ink);
+}
+.practice-area-dark .area-col h4 {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+.area-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.area-list li {
+  position: relative;
+  padding: 10px 0 10px 22px;   /* было 14/14 — тоньше = легче скан */
+  font-size: 15px;             /* было 16 — компактнее */
+  line-height: 1.5;
+  color: var(--ink);
+  border-bottom: 1px solid var(--hairline);
+}
+.practice-area-dark .area-list li {
+  color: rgba(255, 255, 255, 0.86);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+.area-list li::before {
+  content: '';
+  position: absolute;
+  top: 23px;
+  left: 0;
+  width: 8px;
+  height: 1px;
+  background: var(--ink);
+}
+.practice-area-dark .area-list li::before {
+  background: rgba(255, 255, 255, 0.5);
+}
+.area-list li:last-child { border-bottom: none; }
+.area-list-terms li strong {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.area-bottom {
+  max-width: 860px;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+}
+.practice-area-dark .area-bottom {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.area-quote {
+  margin: 56px 0 0;
+  padding: 32px 36px;
+  background: var(--surface-alt, #F2F0EB);
+  border-left: 2px solid var(--ink);
+  max-width: 760px;
+}
+.practice-area-dark .area-quote {
+  background: rgba(255, 255, 255, 0.04);
+  border-left-color: rgba(255, 255, 255, 0.7);
+}
+.area-quote p {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.practice-area-dark .area-quote p { color: #fff; }
+.area-quote footer {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.area-quote footer cite { font-style: normal; font-weight: 600; color: var(--ink); }
+.practice-area-dark .area-quote footer { color: rgba(255, 255, 255, 0.6); }
+.practice-area-dark .area-quote footer cite { color: #fff; }
+
+.practice-final {
+  background: var(--surface);
+  padding: 96px 0 120px;
+}
+.practice-final-card {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.practice-final-card .eyebrow {
+  display: block;
+  margin-bottom: 18px;
+}
+.practice-final-card h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.6vw, 44px);
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.practice-final-card p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--slate);
+  margin-bottom: 36px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.practice-final-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 24px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.btn-secondary:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* Secondary ссылка в practice final CTA — слабее, чем .btn-secondary,
+   чтобы primary (btn-shimmer) явно доминировал. Это просто текстовая
+   ссылка с подчёркиванием. */
+.practice-final-secondary {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--slate);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+@media (hover: hover) {
+  .practice-final-secondary:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+}
+
+/* На mobile intro + первая секция (Asylum) видны сразу — IntersectionObserver
+   не успевает сработать в первом viewport. Остальные секции animate
+   при скролле как обычно. */
+@media (max-width: 639px) {
+  .practice-intro-grid.reveal,
+  .practice-area#asylum .area-head.reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .practice-page-intro { padding: 100px 0 26px; }   /* -30px воздуха над «01 Дела об убежище» */
+  .practice-intro-grid h1 { font-size: 36px; }
+  .practice-intro-lead { font-size: 16px; }
+  .practice-toc {
+    grid-template-columns: 1fr;
+  }
+  .practice-toc a:nth-child(even) {
+    border-left: none;
+    padding-left: 0;
+  }
+  .practice-toc a:nth-child(odd) { padding-right: 0; }
+  .practice-toc a:hover { padding-left: 0; }
+
+  .practice-area { padding: 72px 0; }
+  .area-head { margin-bottom: 40px; }
+  .area-head h2 { font-size: 30px; }
+  .area-lead { font-size: 16px; }
+  .area-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .area-list li { font-size: 15px; padding: 12px 0 12px 18px; }
+  .area-list li::before { top: 20px; }
+  .area-quote {
+    padding: 24px 22px;
+    margin-top: 40px;
+  }
+  .area-quote p { font-size: 17px; }
+
+  .practice-final { padding: 72px 0 88px; }
+  .practice-final-card h2 { font-size: 28px; }
+  .practice-final-actions { flex-direction: column; align-items: stretch; }
+  .practice-final-actions .btn,
+  .practice-final-actions .btn-secondary {
+    justify-content: center;
+    text-align: center;
+  }
+}
+

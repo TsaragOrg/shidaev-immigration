@@ -1,0 +1,159 @@
+/* ============================================================
+   INTENT GRID — 2x2 «что вам нужно»
+============================================================ */
+
+.intent-section { padding: clamp(20px, 3vw, 40px) 0 clamp(48px, 6vw, 80px); }
+.intent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 2vw, 28px);
+}
+
+.intent-card {
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  padding: clamp(28px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.intent-card--urgent {
+  border-left: 3px solid #A8894A;
+}
+.intent-card--booking {
+  background: var(--surface);
+}
+
+.intent-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #A8894A;
+  font-weight: 700;
+}
+.intent-title {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.25;
+  color: var(--ink);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.intent-text {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0;
+  flex-grow: 1;
+}
+.intent-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.intent-phone {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  transition: color 0.3s ease;
+}
+@media (hover: hover) {
+  .intent-phone:hover { color: #A8894A; }
+}
+
+.intent-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid #A8894A;
+  padding-bottom: 4px;
+  align-self: flex-start;
+  transition: color 0.3s ease;
+}
+.intent-link .arrow { transition: transform 0.3s ease; }
+@media (hover: hover) {
+  .intent-link:hover { color: #A8894A; }
+  .intent-link:hover .arrow { transform: translateX(4px); }
+}
+
+.intent-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 18px 28px;
+  background: #A8894A;
+  color: #FFFFFF;
+  border: 1px solid #A8894A;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 14px 36px -10px rgba(168, 137, 74, 0.35);
+  cursor: pointer;
+}
+.intent-btn .arrow { transition: transform 0.3s ease; }
+@media (hover: hover) {
+  .intent-btn:hover {
+    background: #C9A961;
+    border-color: #C9A961;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 44px -10px rgba(168, 137, 74, 0.5);
+  }
+  .intent-btn:hover .arrow { transform: translateX(4px); }
+}
+.intent-meta {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 600;
+  margin: 0;
+}
+
+.intent-btn--outline {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: none;
+}
+.intent-btn-icon { flex-shrink: 0; }
+@media (hover: hover) {
+  .intent-btn--outline:hover {
+    background: var(--ink);
+    color: var(--white);
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -10px rgba(0,0,0,0.25);
+  }
+}
+
+@media (max-width: 1023px) {
+  .intent-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+@media (max-width: 639px) {
+  .intent-card { padding: 24px 20px; }
+  .intent-btn { width: 100%; padding: 16px 24px; }
+}
+

@@ -1,0 +1,87 @@
+/* ============================================================
+   STYLES — перенесено из shidaev-immigration HTML версии.
+   LAW OFFICES OF JACOB SHIDAEV — v5 Institutional Gravitas.
+   Дизайн-токены, типография, секции — оставляем как есть.
+   Tailwind поверх для утилит и новых компонентов (блог).
+============================================================ */
+
+:root {
+  /* B&W + dark bronze accent (2026) — деталь, не массовое золото. */
+  --accent: #3A3530;               /* dark warm charcoal — заменил bronze, монохромный регистр */
+  --accent-soft: #8E8882;          /* mid warm gray — для тёмных фонов где dark accent не виден */
+
+  --surface: #FAFAF9;             /* нейтральный светлый серый — без синевы */
+  --surface-alt: #F4F4F2;         /* alt section, чуть глубже */
+  --white: #FFFFFF;               /* card surface */
+  --ink: #0A0A0A;                 /* near-black text */
+  --ink-soft: #1A1A1A;            /* secondary text */
+  --slate: #5A5A5A;               /* slate-grey labels */
+  --slate-soft: #8A8A8A;          /* meta */
+  --hairline: rgba(0, 0, 0, 0.10);
+  /* gold/navy → soft-black. Чуть приглушено vs pure #000 — мягче для глаза. */
+  --gold: #161616;
+  --gold-deep: #161616;
+  --gold-cream: #FFFFFF;
+  --noir: #161616;
+  --noir-soft: #222222;
+  --black: #161616;
+  --navy: #161616;
+  --navy-soft: #222222;
+  --bronze: #161616;
+  --bronze-deep: #161616;
+  --on-dark: #FFFFFF;
+  --on-dark-soft: rgba(255, 255, 255, 0.78);
+
+  /* Type — шрифты грузятся через next/font (см. layout.tsx).
+     Переменные --font-inter и --font-eb-garamond определены на <html>. */
+  --serif: var(--font-eb-garamond), 'Georgia', serif;
+  --sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Layout */
+  --container: 1480px;
+  --gutter: clamp(20px, 2.4vw, 40px);
+  --section-y: clamp(80px, 11vw, 144px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #FAFAF9;
+  color: var(--ink);
+}
+
+/* iOS 26 Safari status bar — всегда WHITE через фиксированную полоску
+   в зоне env(safe-area-inset-top). Safari сэмплит её для подкрашивания
+   верхнего status bar. Литеральный HEX longhand (не var) — каркас по
+   правилу iOS sampling. На mobile header тоже белый → notch + header
+   сливаются на всех страницах. */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background-color: #FFFFFF;
+  z-index: 999;
+  pointer-events: none;
+}
+
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: var(--accent); color: var(--white); }
+:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }

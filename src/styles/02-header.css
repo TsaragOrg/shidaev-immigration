@@ -1,0 +1,350 @@
+/* ============================================================
+   HEADER — transparent over hero, solid after scroll
+============================================================ */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.4s ease, border-color 0.4s ease, padding 0.3s ease, box-shadow 0.3s ease;
+  padding: 22px 0;
+  color: var(--white);
+}
+/* Default (over hero photo) — light text. Brand-kicker НЕ включен — он всегда gold. */
+.site-header .brand-name,
+.site-header .brand-mark,
+.site-header .nav a,
+.site-header .header-phone .num,
+.site-header .header-phone .label,
+.site-header .lang-switch button,
+.site-header .lang-switch-current,
+.site-header .lang-switch-link,
+.site-header .burger span {
+  color: var(--white);
+  transition: color 0.3s ease;
+}
+.site-header .brand-kicker { transition: color 0.3s ease; }
+.site-header .burger span { background: var(--white); }
+.site-header .header-divider { background: rgba(255, 255, 255, 0.25); }
+.site-header .lang-switch button.active,
+.site-header .lang-switch-current {
+  color: #A8894A;
+  border-bottom-color: #A8894A;
+}
+/* Hover поверх hero (на тёмном фоне) — gold подсветка */
+.site-header .nav a:hover { color: var(--gold-cream); }
+.site-header .nav a::after { background: #FFFFFF; }
+.site-header .header-phone .num:hover { color: var(--gold-cream); }
+.site-header .lang-switch button:hover,
+.site-header .lang-switch-link:hover { color: var(--gold-cream); }
+.site-header .brand:hover .brand-name { color: var(--gold-cream); }
+.site-header .brand:hover .brand-kicker { color: var(--gold-cream); }
+
+.site-header.is-scrolled {
+  /* 96% непрозрачный фон вместо backdrop-filter. backdrop-filter
+     создаёт containing block для fixed-children → .nav (position:fixed)
+     позиционировалась внутри header вместо viewport → mobile burger
+     menu открывался невидимый в 80px зоне. */
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom-color: var(--hairline);
+  padding: 12px 0;
+  box-shadow: 0 1px 0 var(--hairline);
+  color: var(--ink);
+}
+/* Scrolled — reset to dark text */
+.site-header.is-scrolled .brand-name { color: var(--ink); }
+.site-header.is-scrolled .brand-mark { color: var(--gold-deep); }
+.site-header.is-scrolled .nav a { color: var(--slate); }
+.site-header.is-scrolled .nav a:hover { color: var(--gold-deep); }
+.site-header.is-scrolled .nav a::after { background: var(--gold-deep); }
+.site-header.is-scrolled .header-phone .num { color: var(--ink); }
+.site-header.is-scrolled .header-phone .num:hover { color: var(--gold-deep); }
+.site-header.is-scrolled .header-phone .label { color: var(--slate-soft); }
+.site-header.is-scrolled .lang-switch button,
+.site-header.is-scrolled .lang-switch-current,
+.site-header.is-scrolled .lang-switch-link { color: var(--slate); }
+.site-header.is-scrolled .lang-switch button:hover,
+.site-header.is-scrolled .lang-switch-link:hover { color: var(--gold-deep); }
+.site-header.is-scrolled .lang-switch button.active,
+.site-header.is-scrolled .lang-switch-current { color: #A8894A; border-bottom-color: #A8894A; }
+.site-header.is-scrolled .burger span { background: var(--ink); }
+.site-header.is-scrolled .header-divider { background: var(--hairline); }
+/* Brand hover (scrolled) */
+.site-header.is-scrolled .brand:hover .brand-name { color: var(--gold-deep); }
+.site-header.is-scrolled .brand:hover .brand-kicker { color: var(--gold); }
+
+/* ---------- Dark header variant (для внутренних страниц без hero) ---------- */
+body.page-dark-header .site-header,
+body.page-dark-header .site-header.is-scrolled {
+  background: #161616;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  color: var(--white);
+}
+body.page-dark-header .site-header .brand-name,
+body.page-dark-header .site-header.is-scrolled .brand-name { color: var(--white); }
+body.page-dark-header .site-header .brand-kicker,
+body.page-dark-header .site-header.is-scrolled .brand-kicker { color: #A8894A; }
+body.page-dark-header .site-header .nav a,
+body.page-dark-header .site-header.is-scrolled .nav a { color: rgba(255, 255, 255, 0.78); }
+body.page-dark-header .site-header .nav a:hover,
+body.page-dark-header .site-header.is-scrolled .nav a:hover { color: var(--white); }
+body.page-dark-header .site-header .nav a[aria-current="page"],
+body.page-dark-header .site-header.is-scrolled .nav a[aria-current="page"] { color: var(--white); }
+body.page-dark-header .site-header .header-phone .num,
+body.page-dark-header .site-header.is-scrolled .header-phone .num { color: var(--white); }
+body.page-dark-header .site-header .header-phone .label,
+body.page-dark-header .site-header.is-scrolled .header-phone .label { color: rgba(255, 255, 255, 0.55); }
+body.page-dark-header .site-header .lang-switch button,
+body.page-dark-header .site-header .lang-switch-current,
+body.page-dark-header .site-header .lang-switch-link,
+body.page-dark-header .site-header.is-scrolled .lang-switch button,
+body.page-dark-header .site-header.is-scrolled .lang-switch-current,
+body.page-dark-header .site-header.is-scrolled .lang-switch-link { color: rgba(255, 255, 255, 0.7); }
+body.page-dark-header .site-header .lang-switch button.active,
+body.page-dark-header .site-header .lang-switch-current,
+body.page-dark-header .site-header.is-scrolled .lang-switch button.active,
+body.page-dark-header .site-header.is-scrolled .lang-switch-current { color: #A8894A; border-bottom-color: #A8894A; }
+body.page-dark-header .site-header .burger span,
+body.page-dark-header .site-header.is-scrolled .burger span { background: var(--white); }
+body.page-dark-header .site-header .header-divider,
+body.page-dark-header .site-header.is-scrolled .header-divider { background: rgba(255, 255, 255, 0.18); }
+body.page-dark-header .site-header .brand:hover .brand-name,
+body.page-dark-header .site-header.is-scrolled .brand:hover .brand-name { color: rgba(255, 255, 255, 0.7); }
+
+/* Mobile dark-header override побеждает существующий "белый мобильный" override */
+@media (max-width: 1023px) {
+  body.page-dark-header .site-header { background: #161616 !important; }
+  body.page-dark-header .site-header .brand-name { color: var(--white) !important; }
+  body.page-dark-header .site-header .brand-kicker { color: #A8894A !important; }
+  body.page-dark-header .site-header .nav a { color: rgba(255, 255, 255, 0.78) !important; }
+  body.page-dark-header .site-header .burger span { background: var(--white) !important; }
+  body.page-dark-header .site-header .header-phone .num { color: var(--white) !important; }
+}
+
+/* Mobile menu open — header переходит в light state чтобы RU/EN и X читались */
+.site-header.menu-open {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom-color: var(--hairline);
+  color: var(--ink);
+}
+.site-header.menu-open .brand-name { color: var(--ink); }
+.site-header.menu-open .nav a { color: var(--slate); }
+.site-header.menu-open .header-phone .num { color: var(--ink); }
+.site-header.menu-open .header-phone .label { color: var(--slate-soft); }
+.site-header.menu-open .lang-switch button,
+.site-header.menu-open .lang-switch-current,
+.site-header.menu-open .lang-switch-link { color: var(--slate); }
+.site-header.menu-open .lang-switch button.active,
+.site-header.menu-open .lang-switch-current { color: var(--gold-deep); border-bottom-color: var(--gold-deep); }
+.site-header.menu-open .burger span { background: var(--ink); }
+.site-header.menu-open .header-divider { background: var(--hairline); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bronze);
+}
+.brand-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 2px;
+}
+.brand-kicker {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #A8894A;                      /* бронзовый kicker — тёплый акцент к brand-name */
+}
+.site-header.is-scrolled .brand-kicker { color: #A8894A; }
+.site-header.menu-open .brand-kicker { color: #A8894A; }
+.brand-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+@media (max-width: 639px) {
+  .brand-stack { gap: 3px; }
+  .brand-kicker { font-size: 8.5px; letter-spacing: 0.16em; }
+  .brand-name { font-size: 17px; letter-spacing: -0.01em; line-height: 1; white-space: nowrap; }
+
+  /* Mobile наследует те же значения, что и в :root — без overrides */
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav a {
+  position: relative;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+  transition: color 0.3s ease;
+  padding-bottom: 4px;
+}
+/* Snake underline — expand from left on hover, retract to right on leave */
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #FFFFFF;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+.nav a:hover { color: var(--navy); }
+
+/* nav-top — только в открытом мобильном меню. На desktop скрыт. */
+.nav-top { display: none; }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.header-phone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.header-phone .label {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate-soft);
+  font-weight: 600;
+}
+.header-phone .num {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.header-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--hairline);
+}
+.lang-switch {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.lang-switch button,
+.lang-switch-current,
+.lang-switch-link {
+  background: none;
+  border: 0;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--slate);
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 1;
+}
+.lang-switch button.active,
+.lang-switch-current {
+  color: var(--bronze);
+  border-bottom: 2px solid var(--bronze);
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  margin: 5px 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.burger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.is-open span:nth-child(2) { opacity: 0; }
+.burger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 18px 32px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--noir);
+  border-color: var(--gold);
+}
+@media (hover: hover) {
+  .btn-primary:hover { background: var(--gold-deep); border-color: var(--gold-deep); color: var(--noir); }
+}
+.btn-outline {
+  background: transparent;
+  color: var(--noir);
+  border-color: var(--noir);
+}
+.btn-outline:hover { background: var(--noir); border-color: var(--noir); color: var(--surface); }
+.btn .arrow {
+  display: inline-block;
+  font-family: var(--sans);
+  transition: transform 0.3s ease;
+}
+@media (hover: hover) {
+  .btn:hover .arrow { transform: translateX(4px); }
+}

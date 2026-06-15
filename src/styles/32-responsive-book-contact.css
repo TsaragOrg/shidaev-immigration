@@ -1,0 +1,10 @@
+/* ============================================================
+   Responsive — contact (mobile override)
+============================================================ */
+
+@media (max-width: 1023px) {
+  .contact-channels {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

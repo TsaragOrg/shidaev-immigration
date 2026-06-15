@@ -1,0 +1,136 @@
+/* ============================================================
+   FINAL CTA — compact (no form, link → /contact)
+============================================================ */
+
+.final-cta-center {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.final-cta-center h2 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.final-cta-center .final-lead {
+  margin: 0 auto 36px;
+  text-align: center;
+}
+.final-cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;   /* было 28 — больше воздуха между кнопкой и «Срочный вопрос» */
+}
+.final-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 20px 36px;
+  background: #A8894A;
+  color: #FFFFFF;
+  border: 1px solid #A8894A;
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 14px 36px -10px rgba(168, 137, 74, 0.4);
+}
+@media (hover: hover) {
+  .final-cta-btn:hover {
+    background: #C9A961;
+    border-color: #C9A961;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 44px -10px rgba(168, 137, 74, 0.55);
+  }
+  .final-cta-btn:hover .arrow { transform: translateX(4px); }
+}
+.final-cta-btn .arrow {
+  transition: transform 0.3s ease;
+}
+
+/* «Срочный вопрос: телефон · email» — лёгкий вторичный блок под главным CTA.
+   Без иконок-в-рамках, без золотых labels — чтобы единственный золотой акцент
+   был на кнопке записи. */
+.final-urgent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.final-urgent-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--on-dark-soft);
+}
+.final-urgent-contacts {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--white);
+}
+.final-urgent-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.final-urgent-link svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+@media (hover: hover) {
+  .final-urgent-link:hover {
+    color: #C9A961;
+    border-color: #C9A961;
+  }
+  .final-urgent-link:hover svg { opacity: 1; }
+}
+.final-urgent-sep {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Responsive — contact page + final-cta-center */
+@media (max-width: 1023px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .contact-side { padding-top: 0; }
+}
+
+@media (max-width: 639px) {
+  .contact-form-wrap { padding: 24px 20px; }
+  .contact-form .form-row { grid-template-columns: 1fr; gap: 24px; }
+  .final-cta-center { padding: 0 8px; }
+  .final-cta-actions { gap: 22px; }
+  .final-cta-btn { padding: 18px 28px; width: 100%; justify-content: center; max-width: 360px; }
+  /* На узком экране показываем телефон и email одной колонкой —
+     разделитель «·» скрываем, чтобы не висел между строк. */
+  .final-urgent-contacts {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .final-urgent-sep { display: none; }
+}
+

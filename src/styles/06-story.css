@@ -1,0 +1,164 @@
+/* ============================================================
+   STORY
+============================================================ */
+
+.story {
+  background: var(--white);
+  padding: var(--section-y) 0;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: start;
+}
+
+.story-photo-wrap {
+  position: relative;
+  aspect-ratio: 4 / 5;
+}
+.story-photo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.story-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center; /* Jacob в правой части кадра — держим его в crop */
+  filter: grayscale(0.85) contrast(1.06);
+}
+.story-badge {
+  position: absolute;
+  bottom: -28px;
+  right: -28px;
+  background: var(--navy);
+  color: var(--white);
+  padding: 28px 32px;
+  width: 240px;
+  min-height: 112px;
+  box-shadow: 0 20px 40px -10px rgba(20, 17, 13, 0.4);
+}
+.story-badge-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+}
+.story-badge-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #A8894A; /* hardcode — токен --bronze = #161616 (чёрный), не видно на navy фоне */
+  font-weight: 700;
+}
+
+.story-text .eyebrow { display: block; margin-bottom: 14px; }
+.story-text h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+  margin-bottom: 28px;
+  font-weight: 500;
+}
+.story-prose {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--slate);
+}
+.story-prose p + p { margin-top: 18px; }
+
+/* Collapsible bio (mobile: collapsed by default. Desktop: forced open via JS) */
+.story-collapse {
+  margin-top: 24px;
+}
+.story-collapse[open] {
+  margin-top: 18px;
+}
+.story-collapse > p:first-of-type { margin-top: 18px; }
+.story-collapse > p + p { margin-top: 18px; }
+.story-collapse > summary {
+  list-style: none;
+  list-style-type: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 12px 20px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  background: transparent;
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.story-collapse > summary::-webkit-details-marker { display: none; }
+.story-collapse > summary::marker { content: ''; }
+.story-collapse > summary:hover,
+.story-collapse > summary:focus-visible {
+  color: var(--noir);
+  border-color: var(--noir);
+  background: var(--surface-alt);
+  outline: none;
+}
+.story-collapse[open] > summary { display: none; }
+/* Force always open on desktop */
+@media (min-width: 768px) {
+  .story-collapse > summary { display: none; }
+}
+
+.story-pledge {
+  margin-top: 28px;
+  padding: 22px 24px;
+  background: var(--surface-alt);
+  border-left: 3px solid var(--gold);
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.story-pledge em {
+  font-style: italic;
+  color: var(--gold-deep);
+  font-weight: 500;
+}
+.story-pledge-mark {
+  display: inline-block;
+  color: var(--gold-deep);
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+.story-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding-top: 32px;
+  margin-top: 32px;
+  border-top: 1px solid var(--hairline);
+}
+.story-meta-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.story-meta-value {
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.5;
+}
+

@@ -1,0 +1,86 @@
+/* ---------- Type primitives ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+}
+h1 { letter-spacing: 0; }
+
+/* EB Garamond italic — caligraphic swash, ломает единство шрифта.
+   Вместо italic — синтетический oblique через transform: лёгкий наклон,
+   без swash-глифов. inline-block нужен для transform; em короткие (2-3 слова),
+   так что отсутствие переноса внутри em безопасно. */
+h1 em, h2 em,
+h1 .italic-light, h2 .italic-light,
+.hero-card-lead em,
+.practice-intro-text em {
+  font-style: normal;
+  display: inline-block;
+  transform: skewX(-9deg);
+  transform-origin: 0 80%;
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #A8894A;                      /* bronze accent */
+  font-weight: 700;
+}
+
+.eyebrow-slate {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 600;
+}
+
+.italic-light {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Italic accent — pure typography, inherits parent color
+   (was gradient gold — read too glamorous for serious litigator) */
+.text-gradient-gold {
+  color: inherit;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+}
+
+.eyebrow-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #A8894A;                     /* bronze kicker text */
+  font-weight: 700;
+}
+.eyebrow-line::before {
+  content: '';
+  display: inline-block;
+  width: 56px;
+  height: 2px;
+  background: #A8894A;                /* bronze accent dash */
+  flex-shrink: 0;
+}
+
+/* ---------- Layout primitives ---------- */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}

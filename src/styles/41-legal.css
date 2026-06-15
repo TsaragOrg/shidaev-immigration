@@ -1,0 +1,112 @@
+/* ============================================================
+   LEGAL PAGES — /privacy, /legal, /terms, /accessibility
+   Длинный шрифтовой контент. Сдержанная типографика, без декора.
+============================================================ */
+
+.legal {
+  padding: clamp(48px, 12vw, 120px) 0 80px;
+  background: var(--surface);
+}
+
+.legal-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.legal-header {
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.legal-eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin: 0 0 16px;
+}
+
+.legal-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.legal-meta {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--slate-soft);
+  margin: 0;
+}
+
+.legal-intro {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 56px;
+}
+
+.legal-section {
+  margin-bottom: 48px;
+}
+
+.legal-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+
+.legal-section p {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+
+.legal-section p:last-child { margin-bottom: 0; }
+
+.legal-section strong { font-weight: 600; }
+
+.legal-section ul {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.legal-section li {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.legal-section a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+@media (hover: hover) {
+  .legal-section a:hover { color: #A8894A; }
+}
+
+@media (max-width: 768px) {
+  .legal { padding: 100px 0 64px; }
+  .legal-header { margin-bottom: 40px; padding-bottom: 24px; }
+  .legal-intro { font-size: 17px; margin-bottom: 40px; }
+  .legal-section { margin-bottom: 36px; }
+  .legal-section p,
+  .legal-section li { font-size: 16px; }
+}

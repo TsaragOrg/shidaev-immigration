@@ -1,0 +1,195 @@
+/* ============================================================
+   FINAL CTA — dark navy with form
+============================================================ */
+
+.final-cta {
+  background: var(--navy);
+  color: var(--on-dark);
+  padding: var(--section-y) 0;
+}
+.final-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+}
+
+.final-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.final-lead {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--on-dark-soft);
+  max-width: 50ch;
+  margin-bottom: 36px;
+}
+
+.final-contacts { display: flex; flex-direction: column; gap: 20px; padding-top: 24px; }
+.final-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.final-contact-icon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #A8894A;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #A8894A;
+  transition: background 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
+}
+.final-contact-row:hover .final-contact-icon {
+  background: #A8894A;
+  color: #161616;
+}
+.final-contact-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #A8894A;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+.final-contact-value {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.final-form-wrap {
+  background: var(--white);
+  color: var(--ink);
+  padding: 48px;
+}
+.final-form { display: flex; flex-direction: column; gap: 24px; }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-field label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 700;
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  width: 100%;
+}
+.form-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%234A5568' stroke-width='1.6' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 42px;
+  cursor: pointer;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--slate-soft); }
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: var(--gold);
+  background: var(--white);
+}
+.form-field textarea { resize: vertical; min-height: 110px; }
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 18px;
+  margin-bottom: 4px;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--slate);
+  cursor: pointer;
+  user-select: none;
+}
+.form-check input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  margin-top: 1px;
+}
+.form-check input[type="checkbox"]:checked {
+  background: var(--noir);
+  border-color: var(--noir);
+}
+.form-check input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-submit {
+  width: 100%;
+  background: #A8894A;
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 20px;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.form-submit:hover { background: #8E7338; }
+.form-sla {
+  margin-top: 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink);
+  text-align: center;
+  font-weight: 500;
+}
+.form-disclaimer {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--slate-soft);
+  text-align: center;
+  margin-top: 8px;
+}
+

@@ -1,0 +1,406 @@
+
+/* ============================================================
+   PRACTICE
+============================================================ */
+
+.practice {
+  background: var(--surface);
+  padding: clamp(112px, 12vw, 168px) 0;
+}
+
+/* ============================================================
+   PRACTICE (home) — split layout: text left, 2×2 cards right
+============================================================ */
+.practice-split {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  grid-template-areas: "intro cards";
+  column-gap: clamp(48px, 6vw, 96px);
+  row-gap: 32px;
+  align-items: start;
+}
+.practice-intro { grid-area: intro; }
+.practice-cards { grid-area: cards; }
+/* CTA внутри .practice-intro — для desktop. Mobile-вариант — отдельный блок после cards. */
+.practice-intro .practice-cta { margin-top: 8px; }
+
+/* Дубль CTA: desktop-версия (внутри intro) и mobile-версия (после cards).
+   Showing only one at a time. Структурно проще, чем reorder через grid. */
+.practice-cta--mobile { display: none; }
+@media (max-width: 1023px) {
+  .practice-cta--desktop { display: none; }
+  .practice-cta--mobile { display: block; margin-top: 32px; }
+}
+
+.practice-intro .eyebrow {
+  display: block;
+  margin-bottom: 18px;
+}
+.practice-intro h2 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.2vw, 56px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--hairline);
+}
+.practice-intro-text {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--slate);
+  margin-bottom: 28px;
+  max-width: 460px;                   /* было 380 — для 2-3 строк */
+}
+.practice-cta .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  text-decoration: none;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+@media (hover: hover) {
+  .practice-cta .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--white);
+  }
+}
+
+/* Vertical list: 4 строки, hairlines между, [icon] [text] [number] */
+.practice-cards {
+  display: flex;
+  flex-direction: column;
+}
+
+.practice-mini-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
+  align-items: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: padding 0.35s ease;
+}
+.practice-mini-card:first-child {
+  border-top: none;
+  padding-top: 8px;
+}
+.practice-mini-card:last-child { padding-bottom: 8px; }
+@media (hover: hover) {
+  .practice-mini-card:hover {
+    padding-left: 4px;
+  }
+}
+
+.mini-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: var(--surface-alt);
+  color: var(--ink);
+  flex-shrink: 0;
+  align-self: start;
+  margin-top: 2px;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+.mini-icon svg { width: 26px; height: 26px; }
+@media (hover: hover) {
+  .practice-mini-card:hover .mini-icon {
+    background: var(--ink);
+    color: var(--white);
+  }
+}
+
+.mini-text {
+  min-width: 0;
+}
+
+/* Featured card label — bronze eyebrow перед h3, только на desktop list */
+.featured-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #A8894A;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.practice-mini-card h3 {
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.practice-mini-card p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--slate);
+  margin: 0;
+  max-width: 52ch;
+}
+
+/* Mobile-only tag — короткая фраза-маркер, показывается в 2x2 layout */
+.mini-tag {
+  display: none;
+}
+
+.mini-number {
+  font-family: var(--serif);
+  font-size: clamp(28px, 2.6vw, 38px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: rgba(168, 137, 74, 0.55);
+  align-self: start;
+  margin-top: 16px;
+  transition: color 0.35s ease;
+  flex-shrink: 0;
+}
+@media (hover: hover) {
+  .practice-mini-card:hover .mini-number {
+    color: #A8894A;
+  }
+}
+
+/* Tablet — split stacks: intro / cards / cta */
+@media (max-width: 1023px) {
+  .practice-split {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "cards"
+      "cta";
+    row-gap: 48px;
+  }
+  .practice-cta { text-align: center; }
+  .practice-intro h2 { font-size: clamp(32px, 5.6vw, 40px); }
+  .practice-intro-text { max-width: none; }
+}
+@media (max-width: 639px) {
+  /* Tighter section padding on mobile */
+  .practice { padding: 48px 0 80px; background: var(--white); }  /* mobile: уменьшили top — меньше разрыв с hero */
+
+  /* Сокращаем gap между intro/cards/cta на мобайле — убираем "дыру" */
+  .practice-split { row-gap: 24px; }
+  .practice-intro-text { margin-bottom: 0; }  /* убираем 32px которая складывалась с row-gap */
+
+  /* Mobile — 2×2 grid. 4 направления видны сразу. */
+  .practice-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* Card: flex column, content-sized */
+  .practice-mini-card {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+    max-width: none;
+    min-height: 280px;
+    padding: 22px 18px 56px;            /* bottom space для "Подробнее →" */
+    border: none;
+    border-top: none;
+    background: var(--white);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 12px 24px -10px rgba(0, 0, 0, 0.08);
+    position: relative;
+    text-align: left;
+    grid-template-columns: unset;
+  }
+  .practice-mini-card:first-child,
+  .practice-mini-card:last-child {
+    border-top: none;
+    padding: 22px 18px 56px;
+  }
+
+  /* Иконка-кружок — cream tile (ref look). Меньше для 2×2 grid. */
+  .mini-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 0 18px;
+    align-self: start;
+    background: var(--surface-alt);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mini-icon svg { width: 20px; height: 20px; }
+
+  /* Card 2 Federal — dark, dark icon circle с light stroke */
+  .practice-mini-card.card-featured {
+    background: #1F1C18;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 12px 28px -12px rgba(0, 0, 0, 0.18);
+  }
+  .practice-mini-card.card-featured .mini-icon {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+  }
+  .practice-mini-card.card-featured h3 { color: var(--white); }
+  .practice-mini-card.card-featured p { color: rgba(255, 255, 255, 0.65); }
+
+  .featured-label { display: none; }
+
+  /* "→" arrow внизу с hairline — компактно для 2×2 grid */
+  .practice-mini-card::after {
+    content: "→";
+    position: absolute;
+    bottom: 16px;
+    left: 18px;
+    right: 18px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(168, 137, 74, 0.25);
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1;
+    color: #A8894A;
+    pointer-events: none;
+  }
+  .practice-mini-card.card-featured::after {
+    border-top-color: rgba(255, 255, 255, 0.25);
+    color: var(--white);
+  }
+
+  .mini-text {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+  }
+  /* h3 — EB Garamond serif */
+  .practice-mini-card h3 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  /* Description — sans slate, полный текст без обрезки.
+     Раньше был -webkit-line-clamp: 2 — текст обрезался на полуслове
+     (особенно карточка #02 с habeas/mandamus). Сняли clamp:
+     карточки auto-size, grid выравнивает их по высоте самой длинной.
+     .extra остаётся скрытым — дополнение перегружало бы плотный mobile-grid.
+     Видимый text + tag — этого достаточно. */
+  .practice-mini-card p {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--slate);
+    margin: 0;
+  }
+  .practice-mini-card p .extra { display: none; }
+  .practice-mini-card .mini-tag { display: none; }
+
+  /* Roman numerals скрыты на mobile — "Подробнее →" link заменяет */
+  .mini-number { display: none; }
+
+  .practice-intro h2 {
+    font-size: 30px;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .practice-intro h2 br { display: none; }
+  .practice-intro h2 {
+    font-weight: 600;             /* жирнее на мобайле, бренд солиднее */
+    max-width: 18ch;              /* h2 уже — premium editorial */
+  }
+  /* .practice-intro-text — без max-width на мобайле, на всю ширину */
+  /* На мобайле CTA внизу секции — full-width + dark (matches featured card brand dark) */
+  .practice-cta {
+    margin-top: 16px;
+  }
+  /* CTA "Все направления" — info-button: [icon] [label + sub] [arrow] */
+  .btn-allpractice {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 16px;
+    width: 100%;
+    padding: 18px 22px;
+    background: #FFFFFF;
+    border: 1px solid rgba(168, 137, 74, 0.35);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-allpractice:active {
+    background: #FFFFFF;
+    border-color: #A8894A;
+  }
+
+  .btn-allpractice-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  .btn-allpractice-icon svg { width: 20px; height: 20px; }
+
+  .btn-allpractice-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .btn-allpractice-label {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .btn-allpractice-sub {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--slate);
+    line-height: 1.3;
+  }
+
+  .btn-allpractice-arrow {
+    font-family: var(--sans);
+    font-size: 22px;
+    line-height: 1;
+    color: #A8894A;
+    flex-shrink: 0;
+  }
+}
+

@@ -1,0 +1,90 @@
+/* ============================================================
+   CONTACT SECONDARY — «Также можете связаться»
+============================================================ */
+
+.contact-secondary { padding: clamp(20px, 3vw, 40px) 0 clamp(48px, 6vw, 80px); }
+.contact-secondary-inner {
+  border-top: 1px solid var(--hairline);
+  padding-top: clamp(36px, 4vw, 56px);
+}
+.contact-secondary-lead {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 600;
+  margin: 0 0 28px;
+}
+
+.contact-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 4vw, 56px);
+}
+
+.contact-secondary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 18px 24px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.contact-secondary-icon { flex-shrink: 0; }
+.contact-secondary-btn .arrow { transition: transform 0.3s ease; }
+@media (hover: hover) {
+  .contact-secondary-btn:hover {
+    background: var(--ink);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+  .contact-secondary-btn:hover .arrow { transform: translateX(4px); }
+}
+
+.contact-secondary-value {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.8vw, 26px);
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  transition: color 0.3s ease;
+}
+@media (hover: hover) {
+  .contact-secondary-value:hover { color: #A8894A; }
+}
+
+.contact-secondary-note {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--slate);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .contact-secondary-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 639px) {
+  .contact-secondary-btn { width: 100%; padding: 16px 20px; }
+}
+

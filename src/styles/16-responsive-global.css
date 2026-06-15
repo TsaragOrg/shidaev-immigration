@@ -1,0 +1,235 @@
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1024px) {
+  .practice-grid { grid-template-columns: 1fr; gap: 14px; }
+  .practice-card.card-a,
+  .practice-card.card-b,
+  .practice-card.card-c,
+  .practice-card.card-d { grid-column: span 1; min-height: auto; }
+  .card-b-romans { grid-template-columns: 1fr 1fr; }
+  .credentials-grid { grid-template-columns: 1fr; gap: 40px; }
+  .reviews .container { grid-template-columns: 1fr; gap: 32px; }
+  /* На мобиле колонка одна → возвращаем правый отступ голове (контейнер держит padding-right: 0 для карусели) */
+  .reviews-head { padding-right: var(--gutter); }
+  .reviews-head h2 { max-width: none; margin-bottom: 24px; }
+  .reviews-grid .review-card { flex-basis: 300px; }
+  .review-card { padding: 32px 28px 26px; gap: 18px; }
+  .review-card::before { font-size: 76px; left: 22px; }
+  .review-text { font-size: 16px; }
+  .journal-grid { grid-template-columns: 1fr; }
+  .adversarial-grid, .story-grid, .final-grid { grid-template-columns: 1fr; gap: 64px; }
+  /* На мобильном фото идёт первым — сначала сцена, потом смысл */
+  .adversarial-grid .adversarial-photo { order: 1; }
+  .adversarial-grid .adversarial-text { order: 2; }
+  .adversarial-grid { gap: 72px; }
+  /* Фото на мобильном — ограничено по ширине, центрировано */
+  .adversarial-photo { max-width: 340px; margin: 0 auto; }
+  /* Story mobile — magazine layout: фото portrait (сохраняем композицию
+     attorney-портрета как на desktop), badge ПОД фото отдельным блоком */
+  .story-photo-wrap {
+    max-width: 100%;
+    margin: 0;
+    aspect-ratio: auto;
+  }
+  .story-photo {
+    aspect-ratio: 3 / 2;          /* горизонтальный editorial-формат */
+    max-height: 50vh;             /* предохранитель */
+  }
+  .story-photo img {
+    object-position: center center;  /* mobile использует отдельное фото
+                                        shidaev-about-mobile.png — уже скадрировано */
+  }
+  /* Mobile badge — magazine asymmetric overlay: НА нижнем-левом углу
+     фото (overlap, не за пределами). Сидит на фото снизу, торчит
+     только чуть-чуть влево. */
+  .story-badge {
+    position: absolute;
+    bottom: 20px;        /* 20px от нижнего края фото (overlap photo) */
+    left: -12px;         /* торчит 12px влево */
+    right: auto;
+    width: auto;
+    max-width: 220px;
+    min-height: 0;
+    padding: 14px 20px;
+    margin-top: 0;
+    box-shadow: 0 14px 28px -10px rgba(20, 17, 13, 0.4);
+  }
+  .story-badge-title { margin-bottom: 0; font-size: 18px; }
+  /* Story-grid gap — badge теперь поверх фото (bottom: 20px внутри),
+     не торчит вниз. gap 42 даёт +10px воздуха под badge до eyebrow. */
+  .story-grid { gap: 42px; }
+  /* Story-section padding-bottom компактнее на mobile */
+  .story { padding-bottom: 48px; }
+  /* About-credentials grid gap tighter */
+  .about-credentials-grid { gap: 32px; }
+  .hero-card { max-width: 100%; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .header-phone { display: none; }
+  .header-divider { display: none; }
+  .burger { display: block; }
+
+  /* Mobile nav — fixed fullscreen panel.
+     !important на background/opacity/visibility — защита от parent
+     containing-block quirks (filter, transform на ancestors). */
+  .nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    background-color: #FAFAF9 !important;
+    padding: 24px 24px 40px;
+    gap: 22px;
+    align-items: stretch;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    visibility: hidden;
+    transition:
+      opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 0.35s;
+    overflow-y: auto;
+  }
+  .nav.is-open {
+    opacity: 1 !important;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible !important;
+    transition:
+      opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 0s;
+  }
+
+  /* Stagger items — для плавности появления. Если анимация не сработает
+     (например навигация и пересоздание элемента), все элементы видны
+     благодаря opacity: 1 на .nav.is-open > * (защитный fallback ниже). */
+  .nav > a,
+  .nav > .nav-top {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  /* Защитный fallback — все дочерние видны если анимация не подхватилась */
+  .nav.is-open > a,
+  .nav.is-open > .nav-top {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav.is-open > .nav-top { animation: nav-item-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.10s forwards; }
+  .nav.is-open > a:nth-of-type(1) { animation: nav-item-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.16s forwards; }
+  .nav.is-open > a:nth-of-type(2) { animation: nav-item-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.21s forwards; }
+  .nav.is-open > a:nth-of-type(3) { animation: nav-item-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.26s forwards; }
+  .nav.is-open > a:nth-of-type(4) { animation: nav-item-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.31s forwards; }
+  .nav.is-open > a:nth-of-type(5) { animation: nav-item-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.36s forwards; }
+  .nav.is-open > a:nth-of-type(6) { animation: nav-item-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.41s forwards; }
+
+  .nav > a { font-size: 22px; font-family: var(--serif); color: var(--navy); padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+  .nav > .nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .nav-lang {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  /* Усиленная специфичность — перебиваем .site-header .nav a (white over hero) */
+  .site-header .nav .nav-lang-btn,
+  .nav .nav-lang-btn {
+    background: none;
+    border: 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 6px 0;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .site-header .nav .nav-lang-btn.active,
+  .nav .nav-lang-btn.active {
+    color: var(--gold-deep);
+    border-bottom: 2px solid var(--gold-deep);
+  }
+  .nav-close {
+    background: none;
+    border: 1px solid var(--hairline);
+    color: var(--ink);
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .nav-close:hover { border-color: var(--gold); color: var(--gold-deep); }
+
+  /* Floating scroll-to-top — круглая, светлая, soft */
+  .fab-scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: var(--white);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold-deep);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 95;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    box-shadow: 0 10px 28px -8px rgba(19, 27, 46, 0.25);
+  }
+  .fab-scroll-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .fab-scroll-top:hover {
+    background: var(--gold);
+    color: var(--white);
+  }
+}
+.fab-scroll-top { display: none; }
+@media (max-width: 639px) {
+  .fab-scroll-top { display: flex; }
+
+  .practice-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-tile:nth-child(2),
+  .stat-tile:nth-child(3) { transform: none; }
+  .story-meta, .form-row { grid-template-columns: 1fr; }
+  .practice-head, .journal-head { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .practice-head-mark { display: none; }
+  .final-form-wrap { padding: 32px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 56px 0 40px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .hero-card { padding: 0; }
+  .hero-card h1 { font-size: 32px; line-height: 1.15; }
+  .hero-card-actions { flex-direction: column; align-items: stretch; }
+  .hero-card-actions .btn { justify-content: center; }
+  .adversarial-quote { font-size: 24px; }
+  .story-badge { right: 0; bottom: -20px; padding: 20px 24px; }
+}
+

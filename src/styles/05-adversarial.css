@@ -1,0 +1,127 @@
+/* ============================================================
+   ADVERSARIAL — dark institutional section
+============================================================ */
+
+.adversarial {
+  position: relative;
+  background: var(--surface-alt);
+  color: var(--ink);
+  padding: var(--section-y) 0;
+  overflow: hidden;
+}
+/* Watermark отключён — фото-композиция справа стала основным визуалом */
+.adversarial-bg { display: none; }
+.adversarial .container { position: relative; z-index: 1; }
+
+.adversarial-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+}
+
+.adversarial-text .eyebrow { color: #A8894A; display: block; margin-bottom: 20px; }
+.adversarial-quote {
+  font-family: var(--sans);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.adversarial-rule {
+  width: 104px;
+  height: 2px;
+  background: #A8894A;
+  margin-bottom: 28px;
+}
+.adversarial-prose {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--slate);
+  max-width: 58ch;
+}
+.adversarial-prose p + p { margin-top: 16px; }
+
+/* Courtroom photo — editorial composition: offset bronze block + caption */
+.adversarial-photo {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 0 0 auto;          /* прижато к правому краю колонки */
+}
+.adversarial-photo-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.35);
+}
+.adversarial-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: grayscale(1) contrast(0.88) brightness(1.06);  /* light B&W, мягче */
+}
+/* Бронзовая рамка-обводка изнутри */
+.adversarial-photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(168, 137, 74, 0.5);
+}
+/* Лёгкий fade сверху — гасит часы/надпись, направляет взгляд к кафедре */
+.adversarial-photo-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+/* Offset бронзовый блок-подложка — виден из-за фото в правом-нижнем углу */
+.adversarial-photo::before {
+  content: '';
+  position: absolute;
+  right: -4.5%;
+  bottom: -4%;
+  width: 60%;
+  height: 60%;
+  background: #A8894A;
+  z-index: -1;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stat-tile {
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  padding: 32px 24px;
+  transform: translate3d(0, 0, 0);
+}
+.stat-value {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 600;
+  color: #A8894A;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.stat-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 600;
+}
+
