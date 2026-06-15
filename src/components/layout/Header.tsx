@@ -13,6 +13,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { siteConfig } from "@/lib/site-config";
 import type { LangProps, Locale } from "@/lib/types";
 
 const STRINGS = {
@@ -293,8 +294,8 @@ export default function Header({ lang }: LangProps) {
         <div className="header-right">
           <div className="header-phone">
             <span className="label">{t.urgentLabel}</span>
-            <a className="num" href="tel:+14245584141">
-              +1 (424) 558-4141
+            <a className="num" href={siteConfig.contact.phoneHref}>
+              {siteConfig.contact.phoneDisplay}
             </a>
           </div>
           <span className="header-divider"></span>

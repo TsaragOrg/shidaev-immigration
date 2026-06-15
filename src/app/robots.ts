@@ -2,8 +2,7 @@
    Открываем весь сайт, скрываем Sanity Studio (нет смысла индексировать). */
 
 import type { MetadataRoute } from "next";
-
-const SITE_URL = "https://shidaev.com";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -14,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/studio", "/api"],
       },
     ],
-    sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
+    sitemap: absoluteUrl("/sitemap.xml"),
+    host: siteConfig.siteUrl,
   };
 }

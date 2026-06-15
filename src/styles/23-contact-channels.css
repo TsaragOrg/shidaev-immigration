@@ -59,6 +59,9 @@
     padding-left: 28px;
   }
   .contact-channel-row:hover .contact-channel-arrow { transform: translateX(4px); color: #A8894A; }
+  .contact-channel-row:hover .contact-channel-value {
+    color: #A8894A;
+  }
 }
 
 .contact-channel-icon {
@@ -85,9 +88,6 @@
   line-height: 1.2;
   letter-spacing: -0.005em;
   transition: color 0.3s ease;
-}
-.contact-channel-row:hover .contact-channel-value {
-  color: #A8894A;
 }
 .contact-channel-note {
   font-family: var(--serif);
@@ -285,4 +285,3 @@
   display: block;
   filter: grayscale(0.35);
 }
-

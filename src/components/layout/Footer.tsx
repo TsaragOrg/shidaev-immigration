@@ -5,6 +5,7 @@
    (один офис, один Jacob); метки и колонки локализованы. */
 
 import Link from "next/link";
+import { siteConfig } from "@/lib/site-config";
 import type { LangProps } from "@/lib/types";
 
 const STRINGS = {
@@ -79,33 +80,17 @@ export default function Footer({ lang }: LangProps) {
             <p className="footer-brand">{t.brand}</p>
             <p className="footer-blurb">{t.blurb}</p>
             <ul className="footer-social" aria-label={t.socialLabel}>
-              <li>
-                <a
-                  href="https://www.instagram.com/shidaev.immigration"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.tiktok.com/@shidaev.immigration"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  TikTok
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/@LawOfficesofJacobShidaev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  YouTube
-                </a>
-              </li>
+              {siteConfig.socialLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -123,11 +108,11 @@ export default function Footer({ lang }: LangProps) {
           <div className="footer-col">
             <h5>{t.officeTitle}</h5>
             <p className="footer-address">
-              Valley Executive Tower
+              {siteConfig.address.building}
               <br />
-              15233 Ventura Blvd, Suite 1004
+              {siteConfig.address.streetAddress}
               <br />
-              Sherman Oaks, CA 91403
+              {siteConfig.address.cityStateZip}
               <br />
               <br />
               {t.officeHours}

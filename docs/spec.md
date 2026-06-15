@@ -118,7 +118,8 @@
 
 | Интеграция | Что делает | Как встроена |
 |---|---|---|
-| Calendly | Запись на консультацию | Popup-режим только на `/contact` (с других страниц CTA ведут на `/contact`). Детали — `docs/04-функции/запись-на-консультацию.md`. |
+| Calendly | Запись на консультацию | Popup-режим только на `/contact` (с других страниц CTA ведут на `/contact`). URL задаётся через `NEXT_PUBLIC_CALENDLY_URL`. Детали — `docs/04-функции/запись-на-консультацию.md`. |
+| Contact form endpoint | Модалка «Написать письмо» | `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`; сейчас placeholder Formspree, не production-ready. |
 | `mailto:` | Email | Прямые ссылки на `info@shidaev.com` |
 | `tel:` | Звонок | Клик-в-звонок `+14245584141` |
 | WhatsApp | Тот же номер | Срочный канал, открывается ссылкой |
@@ -178,13 +179,14 @@
 | Что | Где | Чей аккаунт |
 |---|---|---|
 | **Live URL** | `https://shidaev-immigration.vercel.app` (Vercel preview-домен) | Zouli |
+| **Canonical/site URL** | `NEXT_PUBLIC_SITE_URL` = `https://shidaev.com` | Jacob domain target |
 | **Домен `shidaev.com`** | ❌ НЕ подключён (планируется к Jacob) | — |
 | **Repo** | `github.com/doukhaeva-design/shidaev-immigration` (private) | Zouli |
 | **Vercel project** | `shidaev-immigration` | Zouli |
 | **Sanity Studio** | `/studio` на проде, project ID в `.env.local` | Zouli |
-| **Calendly** | `calendly.com/zulihan1993/30min` | Zouli (тест) |
+| **Calendly** | `NEXT_PUBLIC_CALENDLY_URL` = `calendly.com/zulihan1993/30min` | Zouli (тест) |
 
-В коде (`robots.ts`, `sitemap.ts`, `metadataBase`, JSON-LD) URL `https://shidaev.com` уже зашит — это canonical для SEO. После подключения домена работает автоматически, переписывать ничего не надо.
+В коде (`robots.ts`, `sitemap.ts`, `metadataBase`, JSON-LD) canonical URL берётся из `NEXT_PUBLIC_SITE_URL` через `src/lib/site-config.ts`. После подключения домена нужно проверить Vercel env, а не искать URL по компонентам.
 
 **Email `info@shidaev.com`** — работает ли сейчас, требует уточнения (мейл-сервис на домене должен быть настроен отдельно от веб-домена).
 

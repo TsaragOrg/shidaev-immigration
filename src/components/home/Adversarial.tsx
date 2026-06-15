@@ -3,6 +3,7 @@
    Серверный компонент. Стили из globals.css: .adversarial, etc. */
 
 import Image from "next/image";
+import { siteConfig } from "@/lib/site-config";
 import type { LangProps } from "@/lib/types";
 
 const STRINGS = {
@@ -28,7 +29,7 @@ export default function Adversarial({ lang }: LangProps) {
       <div className="adversarial-bg" aria-hidden="true">
         {/* Unsplash фон. Allowed host прописан в next.config.ts */}
         <Image
-          src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=1920&q=80"
+          src={siteConfig.assets.adversarialBackgroundUrl}
           alt=""
           width={1920}
           height={1080}

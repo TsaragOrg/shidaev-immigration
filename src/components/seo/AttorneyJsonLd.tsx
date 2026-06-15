@@ -4,6 +4,8 @@
 
    Bilingual: лёгкий вариант — единая разметка с inLanguage. */
 
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
+
 interface AttorneyJsonLdProps {
   lang: "ru" | "en";
 }
@@ -12,26 +14,26 @@ export default function AttorneyJsonLd({ lang }: AttorneyJsonLdProps) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Attorney",
-    name: "Law Offices of Jacob Shidaev",
-    legalName: "Law Offices of Jacob Shidaev",
+    name: siteConfig.firmName,
+    legalName: siteConfig.firmName,
     description:
       lang === "ru"
         ? "Иммиграционный адвокат с судебным подходом к каждому делу. Дела об убежище, иммиграционный суд, федеральные суды."
         : "Trial-ready immigration defense. Asylum, removal defense, federal litigation.",
-    url: lang === "ru" ? "https://shidaev.com" : "https://shidaev.com/en",
+    url: lang === "ru" ? siteConfig.siteUrl : absoluteUrl("/en"),
     inLanguage: lang === "ru" ? "ru" : "en",
-    image: "https://shidaev.com/photos/shidaev-black-hero.png",
-    logo: "https://shidaev.com/photos/shidaev-black-hero.png",
-    telephone: "+1-424-558-4141",
-    email: "info@shidaev.com",
+    image: absoluteUrl(siteConfig.heroImagePath),
+    logo: absoluteUrl(siteConfig.heroImagePath),
+    telephone: siteConfig.contact.phoneSchema,
+    email: siteConfig.contact.email,
     priceRange: "$$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "15233 Ventura Blvd, Suite 1004",
-      addressLocality: "Sherman Oaks",
-      addressRegion: "CA",
-      postalCode: "91403",
-      addressCountry: "US",
+      streetAddress: siteConfig.address.streetAddress,
+      addressLocality: siteConfig.address.addressLocality,
+      addressRegion: siteConfig.address.addressRegion,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.addressCountry,
     },
     areaServed: {
       "@type": "Country",
@@ -61,11 +63,7 @@ export default function AttorneyJsonLd({ lang }: AttorneyJsonLdProps) {
         closes: "17:00",
       },
     ],
-    sameAs: [
-      "https://www.instagram.com/shidaev.immigration",
-      "https://www.tiktok.com/@shidaev.immigration",
-      "https://www.youtube.com/@LawOfficesofJacobShidaev",
-    ],
+    sameAs: siteConfig.socialLinks.map((link) => link.href),
   };
 
   return (

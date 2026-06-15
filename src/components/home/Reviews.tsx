@@ -8,6 +8,7 @@
    подключения можно вынести в CMS, если Jacob захочет. */
 
 import { useRef } from "react";
+import { siteConfig } from "@/lib/site-config";
 import type { LangProps } from "@/lib/types";
 
 const STRINGS = {
@@ -158,7 +159,7 @@ export default function Reviews({ lang }: LangProps) {
 
         <div className="reviews-cta">
           <a
-            href="https://www.google.com/search?q=Law+Offices+of+Jacob+Shidaev&kgmid=/g/11vhf_12pq"
+            href={siteConfig.googleReviewsUrl}
             target="_blank"
             rel="noopener"
           >

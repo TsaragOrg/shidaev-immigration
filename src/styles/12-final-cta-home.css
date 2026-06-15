@@ -47,9 +47,11 @@
   transition: background 0.3s ease, color 0.3s ease;
   flex-shrink: 0;
 }
-.final-contact-row:hover .final-contact-icon {
-  background: #A8894A;
-  color: #161616;
+@media (hover: hover) {
+  .final-contact-row:hover .final-contact-icon {
+    background: #A8894A;
+    color: #161616;
+  }
 }
 .final-contact-label {
   font-family: var(--sans);
@@ -176,7 +178,9 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-.form-submit:hover { background: #8E7338; }
+@media (hover: hover) {
+  .form-submit:hover { background: #8E7338; }
+}
 .form-sla {
   margin-top: 16px;
   font-family: var(--sans);
@@ -192,4 +196,3 @@
   text-align: center;
   margin-top: 8px;
 }
-

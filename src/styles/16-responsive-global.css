@@ -177,8 +177,6 @@
     border-radius: 0;
     transition: border-color 0.3s ease, color 0.3s ease;
   }
-  .nav-close:hover { border-color: var(--gold); color: var(--gold-deep); }
-
   /* Floating scroll-to-top — круглая, светлая, soft */
   .fab-scroll-top {
     position: fixed;
@@ -206,6 +204,10 @@
     pointer-events: auto;
     transform: translateY(0);
   }
+}
+@media (max-width: 1023px) and (hover: hover) {
+  .nav-close:hover { border-color: var(--gold); color: var(--gold-deep); }
+
   .fab-scroll-top:hover {
     background: var(--gold);
     color: var(--white);
@@ -232,4 +234,3 @@
   .adversarial-quote { font-size: 24px; }
   .story-badge { right: 0; bottom: -20px; padding: 20px 24px; }
 }
-

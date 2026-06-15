@@ -3,9 +3,8 @@
    подсказки в Knowledge Graph, лучшее ранжирование. */
 
 import { urlFor } from "@/sanity/lib/image";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
 import type { PostFull } from "@/sanity/lib/types";
-
-const SITE_URL = "https://shidaev.com";
 
 interface Props {
   post: PostFull;
@@ -13,10 +12,10 @@ interface Props {
 }
 
 export default function ArticleJsonLd({ post, lang }: Props) {
-  const url = `${SITE_URL}${lang === "en" ? "/en" : ""}/blog/${post.slug}`;
+  const url = absoluteUrl(`${lang === "en" ? "/en" : ""}/blog/${post.slug}`);
   const imageUrl = post.coverImage?.asset
     ? urlFor(post.coverImage).width(1200).height(630).fit("crop").url()
-    : `${SITE_URL}/photos/shidaev-black-hero.png`;
+    : absoluteUrl(siteConfig.heroImagePath);
 
   const json = {
     "@context": "https://schema.org",
@@ -36,14 +35,14 @@ export default function ArticleJsonLd({ post, lang }: Props) {
         }
       : {
           "@type": "Organization",
-          name: "Law Offices of Jacob Shidaev",
+          name: siteConfig.firmName,
         },
     publisher: {
       "@type": "Organization",
-      name: "Law Offices of Jacob Shidaev",
+      name: siteConfig.firmName,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/photos/shidaev-black-hero.png`,
+        url: absoluteUrl(siteConfig.heroImagePath),
       },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },

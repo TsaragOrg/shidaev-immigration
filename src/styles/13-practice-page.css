@@ -59,12 +59,14 @@
   padding-left: 24px;
   padding-right: 24px;
 }
-.practice-toc a:hover {
-  color: var(--slate);
-  padding-left: 8px;
-}
-.practice-toc a:nth-child(even):hover {
-  padding-left: 32px;
+@media (hover: hover) {
+  .practice-toc a:hover {
+    color: var(--slate);
+    padding-left: 8px;
+  }
+  .practice-toc a:nth-child(even):hover {
+    padding-left: 32px;
+  }
 }
 
 .practice-area {
@@ -285,9 +287,11 @@
   text-decoration: none;
   transition: background 0.3s ease, color 0.3s ease;
 }
-.btn-secondary:hover {
-  background: var(--ink);
-  color: var(--white);
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--white);
+  }
 }
 
 /* Secondary ссылка в practice final CTA — слабее, чем .btn-secondary,
@@ -332,8 +336,6 @@
     padding-left: 0;
   }
   .practice-toc a:nth-child(odd) { padding-right: 0; }
-  .practice-toc a:hover { padding-left: 0; }
-
   .practice-area { padding: 72px 0; }
   .area-head { margin-bottom: 40px; }
   .area-head h2 { font-size: 30px; }
@@ -360,4 +362,3 @@
     text-align: center;
   }
 }
-

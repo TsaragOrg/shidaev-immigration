@@ -93,7 +93,7 @@ Zouli — приглашённый коллаборатор на время ра
 
 Откладываем выбор на финальное ревью. На этапе Next.js (этап 6) разумно перейти на свой API + Resend, на стартовом HTML — Formspree как промежуточное решение.
 
-Сейчас в обеих формах стоит placeholder `https://formspree.io/f/YOUR_FORM_ID` — подставлю реальный endpoint когда решим.
+Сейчас form endpoint задаётся через `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`, но значение остаётся placeholder `https://formspree.io/f/YOUR_FORM_ID` — подставлю реальный endpoint когда решим.
 
 ### 3. Calendly — production-аккаунт
 
@@ -103,7 +103,7 @@ Zouli — приглашённый коллаборатор на время ра
 - Подключает Google Calendar Jacob'а
 - Stripe (для предоплаты $150) — Standard план $12/мес
 - Создаёт event «30-minute consultation»
-- Присылает URL — я меняю в обоих файлах /contact
+- Присылает URL — я меняю `NEXT_PUBLIC_CALENDLY_URL` в Vercel env и локальном `.env.local`
 
 ### 4. Профессиональные фото
 
@@ -192,7 +192,7 @@ Zouli — приглашённый коллаборатор на время ра
 
 ## Технические задачи (на моей стороне, после ответов выше)
 
-- [ ] Подставить Formspree endpoint в формы
+- [ ] Подставить Formspree endpoint в `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`
 - [ ] Сменить Calendly URL на production
 - [ ] Заменить фото-плейсхолдер на портрет Jacob
 - [ ] Привести адрес к одному варианту

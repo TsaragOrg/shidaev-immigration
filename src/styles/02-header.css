@@ -35,14 +35,16 @@
   color: #A8894A;
   border-bottom-color: #A8894A;
 }
-/* Hover поверх hero (на тёмном фоне) — gold подсветка */
-.site-header .nav a:hover { color: var(--gold-cream); }
 .site-header .nav a::after { background: #FFFFFF; }
-.site-header .header-phone .num:hover { color: var(--gold-cream); }
-.site-header .lang-switch button:hover,
-.site-header .lang-switch-link:hover { color: var(--gold-cream); }
-.site-header .brand:hover .brand-name { color: var(--gold-cream); }
-.site-header .brand:hover .brand-kicker { color: var(--gold-cream); }
+/* Hover поверх hero (на тёмном фоне) — gold подсветка */
+@media (hover: hover) {
+  .site-header .nav a:hover { color: var(--gold-cream); }
+  .site-header .header-phone .num:hover { color: var(--gold-cream); }
+  .site-header .lang-switch button:hover,
+  .site-header .lang-switch-link:hover { color: var(--gold-cream); }
+  .site-header .brand:hover .brand-name { color: var(--gold-cream); }
+  .site-header .brand:hover .brand-kicker { color: var(--gold-cream); }
+}
 
 .site-header.is-scrolled {
   /* 96% непрозрачный фон вместо backdrop-filter. backdrop-filter
@@ -59,23 +61,24 @@
 .site-header.is-scrolled .brand-name { color: var(--ink); }
 .site-header.is-scrolled .brand-mark { color: var(--gold-deep); }
 .site-header.is-scrolled .nav a { color: var(--slate); }
-.site-header.is-scrolled .nav a:hover { color: var(--gold-deep); }
 .site-header.is-scrolled .nav a::after { background: var(--gold-deep); }
 .site-header.is-scrolled .header-phone .num { color: var(--ink); }
-.site-header.is-scrolled .header-phone .num:hover { color: var(--gold-deep); }
 .site-header.is-scrolled .header-phone .label { color: var(--slate-soft); }
 .site-header.is-scrolled .lang-switch button,
 .site-header.is-scrolled .lang-switch-current,
 .site-header.is-scrolled .lang-switch-link { color: var(--slate); }
-.site-header.is-scrolled .lang-switch button:hover,
-.site-header.is-scrolled .lang-switch-link:hover { color: var(--gold-deep); }
 .site-header.is-scrolled .lang-switch button.active,
 .site-header.is-scrolled .lang-switch-current { color: #A8894A; border-bottom-color: #A8894A; }
 .site-header.is-scrolled .burger span { background: var(--ink); }
 .site-header.is-scrolled .header-divider { background: var(--hairline); }
-/* Brand hover (scrolled) */
-.site-header.is-scrolled .brand:hover .brand-name { color: var(--gold-deep); }
-.site-header.is-scrolled .brand:hover .brand-kicker { color: var(--gold); }
+@media (hover: hover) {
+  .site-header.is-scrolled .nav a:hover { color: var(--gold-deep); }
+  .site-header.is-scrolled .header-phone .num:hover { color: var(--gold-deep); }
+  .site-header.is-scrolled .lang-switch button:hover,
+  .site-header.is-scrolled .lang-switch-link:hover { color: var(--gold-deep); }
+  .site-header.is-scrolled .brand:hover .brand-name { color: var(--gold-deep); }
+  .site-header.is-scrolled .brand:hover .brand-kicker { color: var(--gold); }
+}
 
 /* ---------- Dark header variant (для внутренних страниц без hero) ---------- */
 body.page-dark-header .site-header,
@@ -91,8 +94,6 @@ body.page-dark-header .site-header .brand-kicker,
 body.page-dark-header .site-header.is-scrolled .brand-kicker { color: #A8894A; }
 body.page-dark-header .site-header .nav a,
 body.page-dark-header .site-header.is-scrolled .nav a { color: rgba(255, 255, 255, 0.78); }
-body.page-dark-header .site-header .nav a:hover,
-body.page-dark-header .site-header.is-scrolled .nav a:hover { color: var(--white); }
 body.page-dark-header .site-header .nav a[aria-current="page"],
 body.page-dark-header .site-header.is-scrolled .nav a[aria-current="page"] { color: var(--white); }
 body.page-dark-header .site-header .header-phone .num,
@@ -113,8 +114,12 @@ body.page-dark-header .site-header .burger span,
 body.page-dark-header .site-header.is-scrolled .burger span { background: var(--white); }
 body.page-dark-header .site-header .header-divider,
 body.page-dark-header .site-header.is-scrolled .header-divider { background: rgba(255, 255, 255, 0.18); }
-body.page-dark-header .site-header .brand:hover .brand-name,
-body.page-dark-header .site-header.is-scrolled .brand:hover .brand-name { color: rgba(255, 255, 255, 0.7); }
+@media (hover: hover) {
+  body.page-dark-header .site-header .nav a:hover,
+  body.page-dark-header .site-header.is-scrolled .nav a:hover { color: var(--white); }
+  body.page-dark-header .site-header .brand:hover .brand-name,
+  body.page-dark-header .site-header.is-scrolled .brand:hover .brand-name { color: rgba(255, 255, 255, 0.7); }
+}
 
 /* Mobile dark-header override побеждает существующий "белый мобильный" override */
 @media (max-width: 1023px) {
@@ -225,11 +230,13 @@ body.page-dark-header .site-header.is-scrolled .brand:hover .brand-name { color:
   transform-origin: right center;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.nav a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
+@media (hover: hover) {
+  .nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+  .nav a:hover { color: var(--navy); }
 }
-.nav a:hover { color: var(--navy); }
 
 /* nav-top — только в открытом мобильном меню. На desktop скрыт. */
 .nav-top { display: none; }
@@ -339,7 +346,9 @@ body.page-dark-header .site-header.is-scrolled .brand:hover .brand-name { color:
   color: var(--noir);
   border-color: var(--noir);
 }
-.btn-outline:hover { background: var(--noir); border-color: var(--noir); color: var(--surface); }
+@media (hover: hover) {
+  .btn-outline:hover { background: var(--noir); border-color: var(--noir); color: var(--surface); }
+}
 .btn .arrow {
   display: inline-block;
   font-family: var(--sans);

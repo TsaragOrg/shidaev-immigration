@@ -6,11 +6,12 @@
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata = {
   title: "Страница не найдена · Page not found",
   description:
-    "Запрошенная страница не найдена. Вернуться на главную: shidaev.com",
+    `Запрошенная страница не найдена. Вернуться на главную: ${siteConfig.domainDisplay}`,
 };
 
 export default function NotFound() {

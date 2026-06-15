@@ -12,6 +12,7 @@
 **WhatsApp:** `https://wa.me/14245584141`
 
 Где:
+- `src/lib/site-config.ts` — источник non-legal config для Header/Footer/Contact/SEO
 - `src/components/layout/Header.tsx:297` — телефон в шапке
 - `src/components/layout/Footer.tsx` — не явно, но в адресе/контактах
 - `src/components/home/FinalCTA.tsx:83, 89` — phone row + display
@@ -37,6 +38,8 @@
 
 **Проверить:** почтовый ящик настроен и кто-то его читает?
 
+**Технически:** после рефакторинга публичные компоненты и SEO берут phone/email из `src/lib/site-config.ts`. Legal pages пока держат свои локальные constants и требуют отдельного legal/compliance прохода.
+
 ---
 
 ## 2. Адрес офиса
@@ -48,12 +51,15 @@ Sherman Oaks, CA 91403
 ```
 
 Где:
+- `src/lib/site-config.ts` — источник non-legal config для адреса + Google Maps iframe
 - `src/components/layout/Footer.tsx:126-130` — full address
 - `src/components/pages/ContactPage.tsx:270-274` — address блок
 - `src/components/pages/ContactPage.tsx:290` — Google Maps embed iframe (поиск по адресу)
 - `src/components/seo/AttorneyJsonLd.tsx:29-34` — schema.org PostalAddress
 
 **Проверить:** офис всё ещё там? Suite номер актуальный?
+
+**Технически:** публичные компоненты и Attorney JSON-LD берут адрес из `src/lib/site-config.ts`. Legal pages пока держат свои локальные constants и требуют отдельного legal/compliance прохода.
 
 ---
 
@@ -75,16 +81,17 @@ Sherman Oaks, CA 91403
 
 ## 4. Calendly URL — ⚠️ ПЛЕЙСХОЛДЕР
 
-Сейчас стоит **мой demo-аккаунт** `zulihan1993` — нужно заменить на Calendly Jacob.
+Сейчас env/fallback указывает на **мой demo-аккаунт** `zulihan1993` — нужно заменить на Calendly Jacob.
 
 Где:
-- `src/components/pages/ContactPage.tsx:117` — popup widget URL
-- `src/components/pages/ContactPage.tsx:122` — fallback open
-- `src/components/pages/ContactPage.tsx:168` — href fallback
+- `.env.local` / Vercel env: `NEXT_PUBLIC_CALENDLY_URL`
+- `.env.example` — пример переменной
+- `src/lib/calendly.ts` — fallback demo URL и widget-параметры
+- `src/components/pages/ContactPage.tsx` — использует готовые URL
 
-Текущее значение:
+Текущее demo-значение:
 ```
-https://calendly.com/zulihan1993/30min?primary_color=A8894A&hide_gdpr_banner=1
+https://calendly.com/zulihan1993/30min
 ```
 
 **Что нужно от Jacob:**
@@ -99,7 +106,10 @@ https://calendly.com/zulihan1993/30min?primary_color=A8894A&hide_gdpr_banner=1
 Форма «Написать письмо» сейчас НЕ РАБОТАЕТ.
 
 Где:
-- `src/components/pages/ContactPage.tsx:346`
+- `.env.local` / Vercel env: `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`
+- `.env.example` — пример переменной
+- `src/lib/site-config.ts` — fallback placeholder
+- `src/components/pages/ContactPage.tsx` — form `action`
 
 Текущее:
 ```
@@ -108,7 +118,7 @@ action="https://formspree.io/f/YOUR_FORM_ID"
 
 **Что нужно:**
 - Решение от Jacob: Formspree (бесплатно 50/мес) ИЛИ свой `/api/contact` через Resend.
-- Если Formspree: зарегистрироваться, создать form, получить ID, подставить.
+- Если Formspree: зарегистрироваться, создать form, получить ID, подставить в `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`.
 
 ---
 
@@ -149,21 +159,23 @@ YouTube:    https://www.youtube.com/@LawOfficesofJacobShidaev
 
 **Проверить:** все три handle реально существуют у Jacob? Если каких-то нет — убрать из Footer **и** из JSON-LD одновременно.
 
+**Технически:** Footer и Attorney JSON-LD теперь читают список из `src/lib/site-config.ts`.
+
 ---
 
 ## 9. Google Maps / Google Business Profile
 
 ### Maps iframe (карта в /contact)
-`src/components/pages/ContactPage.tsx:290`
+`src/lib/site-config.ts` → `siteConfig.address.mapsEmbedUrl`
 ```
 https://www.google.com/maps?q=15233+Ventura+Blvd+Suite+1004+Sherman+Oaks+CA+91403&output=embed&z=15
 ```
 Это поиск по адресу — должно работать без place_id, но если у Jacob есть verified GBP — лучше его embed code.
 
 ### Ссылка «view all reviews» на главной — ⚠️ generic search
-`src/components/home/Reviews.tsx:161`
+`NEXT_PUBLIC_GOOGLE_REVIEWS_URL` / `src/lib/site-config.ts`
 ```
-https://www.google.com/maps/place/Law+Offices+of+Jacob+Shidaev
+https://www.google.com/search?q=Law+Offices+of+Jacob+Shidaev&kgmid=/g/11vhf_12pq
 ```
 Это generic search URL, может открыть НЕ ТО место. **Нужна** реальная ссылка на Google Business Profile Jacob (если есть). Если GBP-а нет — убрать ссылку или заменить на «оставить отзыв на Google» с другой UX-логикой.
 
@@ -236,12 +248,16 @@ Membership: **AILA (American Immigration Lawyers Association)** — отделе
 
 ## 13. Домен сайта
 
-Везде стоит `https://shidaev.com`:
-- `src/app/(site)/layout.tsx:16` — metadataBase
-- `src/app/sitemap.ts:8` — SITE_URL
-- `src/app/robots.ts:6` — SITE_URL
-- `src/components/seo/AttorneyJsonLd.tsx:21, 23, 24` — schema.org URL
-- `src/app/(site)/blog/[slug]/page.tsx:37, 63` — canonical / hreflang
+Публичные SEO/canonical URL берутся из `NEXT_PUBLIC_SITE_URL` через `src/lib/site-config.ts`.
+
+Раньше везде стояло `https://shidaev.com`; сейчас проверить нужно:
+- `.env.local` / Vercel env: `NEXT_PUBLIC_SITE_URL`
+- `src/lib/site-config.ts` — `siteUrl` + `absoluteUrl()`
+- `src/app/(site)/layout.tsx` — metadataBase
+- `src/app/sitemap.ts` — sitemap URLs
+- `src/app/robots.ts` — host + sitemap
+- `src/components/seo/AttorneyJsonLd.tsx` — schema.org URL
+- `src/app/(site)/blog/[slug]/page.tsx` — canonical / hreflang
 
 Vercel deploy сейчас на каком-то `shidaev-immigration-*.vercel.app` (см. `.vercel/`).
 
@@ -277,8 +293,8 @@ Design & development · doukhaeva.com
 
 | # | Что | Где | Эффект |
 |---|-----|-----|--------|
-| 4 | Calendly URL = демо | `ContactPage.tsx:117, 122, 168` | Клиент бронирует мой слот, не Jacob |
-| 5 | Formspree = `YOUR_FORM_ID` | `ContactPage.tsx:346` | Форма «Написать письмо» → ошибка |
-| 9 | Google Reviews = search URL | `Reviews.tsx:161` | Клиент попадает не на тот листинг |
+| 4 | Calendly URL = демо | `NEXT_PUBLIC_CALENDLY_URL` / `src/lib/calendly.ts` fallback | Клиент бронирует мой слот, не Jacob |
+| 5 | Formspree = `YOUR_FORM_ID` | `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` / `src/lib/site-config.ts` fallback | Форма «Написать письмо» → ошибка |
+| 9 | Google Reviews = search URL | `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` / `src/lib/site-config.ts` fallback | Клиент попадает не на тот листинг |
 
 Остальные пункты (соцсети, фото, имена отзывов, биография) — нужно подтвердить, но они не ломают сайт.

@@ -208,10 +208,6 @@
     box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.25);
     justify-content: center;
   }
-  .hero-card-actions .btn-shimmer:hover {
-    background: #000;
-    border-color: #000;
-  }
   .btn-glass {
     background: transparent;
     border: 0;
@@ -222,11 +218,6 @@
     text-align: center;
     justify-content: center;
   }
-  .btn-glass:hover {
-    background: transparent;
-    border-bottom-color: var(--ink);
-    color: var(--ink);
-  }
   .btn-icon-wa { color: var(--ink); }
   .btn-phone .arrow { color: var(--ink); }
   .hero-card-strip { display: none; }
@@ -234,3 +225,14 @@
   .hero-scroll { display: none; }
 }
 
+@media (max-width: 639px) and (hover: hover) {
+  .hero-card-actions .btn-shimmer:hover {
+    background: #000;
+    border-color: #000;
+  }
+  .btn-glass:hover {
+    background: transparent;
+    border-bottom-color: var(--ink);
+    color: var(--ink);
+  }
+}

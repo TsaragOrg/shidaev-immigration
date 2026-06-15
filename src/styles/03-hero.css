@@ -186,11 +186,6 @@
   padding: 14px 0;
   border-radius: 0;
 }
-.btn-glass:hover {
-  background: transparent;
-  border-bottom-color: #C9A961;
-  color: #F5E9C8;
-}
 
 /* Phone button with WhatsApp icon + arrow indicator */
 .btn-phone {
@@ -204,7 +199,6 @@
   color: var(--white);
   flex-shrink: 0;
 }
-.btn-phone:hover .btn-icon-wa { color: var(--gold-cream); }
 .btn-phone .btn-phone-label { text-align: left; }
 .btn-phone .arrow {
   font-family: var(--sans);
@@ -215,7 +209,15 @@
   display: inline-flex;
   line-height: 1;
 }
-.btn-phone:hover .arrow { transform: translate(2px, 2px); color: var(--gold-cream); }
+@media (hover: hover) {
+  .btn-glass:hover {
+    background: transparent;
+    border-bottom-color: #C9A961;
+    color: #F5E9C8;
+  }
+  .btn-phone:hover .btn-icon-wa { color: var(--gold-cream); }
+  .btn-phone:hover .arrow { transform: translate(2px, 2px); color: var(--gold-cream); }
+}
 @media (max-width: 639px) {
   /* На mobile стрелка прижата к номеру, не отжимается к правому краю */
   .btn-phone .arrow { margin-left: 10px; }
@@ -401,14 +403,17 @@
     font-size: 13px;
     letter-spacing: 0.16em;
   }
+  .hero-card-actions .btn-shimmer .arrow { color: #A8894A; }
+  .hero-scroll { display: none; }
+}
+
+@media (min-width: 1024px) and (hover: hover) {
   .hero-card-actions .btn-shimmer:hover {
     background: #A8894A;
     border-color: #A8894A;
     color: #FFFFFF;
   }
-  .hero-card-actions .btn-shimmer .arrow { color: #A8894A; }
   .hero-card-actions .btn-shimmer:hover .arrow { color: #FFFFFF; }
-  .hero-scroll { display: none; }
 }
 
 /* WIDE desktop — больше воздуха */
@@ -440,4 +445,3 @@
   :root[lang="ru"] .hero-card h1,
   [lang="ru"] .hero-card h1 { font-size: clamp(52px, 3.8vw, 64px); line-height: 1.2; }
 }
-

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import RevealOnScroll from "@/components/layout/RevealOnScroll";
 import FabScrollTop from "@/components/layout/FabScrollTop";
+import { siteConfig } from "@/lib/site-config";
 import "../globals.css";
 
 /* Site layout — route group (site).
@@ -14,7 +15,7 @@ import "../globals.css";
    в Studio. */
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shidaev.com"),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
     default: "Law Offices of Jacob Shidaev",
     template: "%s — Law Offices of Jacob Shidaev",

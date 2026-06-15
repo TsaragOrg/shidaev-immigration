@@ -2,6 +2,7 @@
    Серверный компонент. Стили из globals.css: .final-cta, etc. */
 
 import Link from "next/link";
+import { siteConfig } from "@/lib/site-config";
 import type { LangProps } from "@/lib/types";
 
 const STRINGS = {
@@ -76,16 +77,22 @@ export default function FinalCTA({ lang }: LangProps) {
             <div className="final-urgent">
               <span className="final-urgent-label">{t.urgentLabel}</span>
               <div className="final-urgent-contacts">
-                <a href="tel:+14245584141" className="final-urgent-link">
+                <a
+                  href={siteConfig.contact.phoneHref}
+                  className="final-urgent-link"
+                >
                   <PhoneIcon />
-                  <span>+1 (424) 558-4141</span>
+                  <span>{siteConfig.contact.phoneDisplay}</span>
                 </a>
                 <span className="final-urgent-sep" aria-hidden>
                   ·
                 </span>
-                <a href="mailto:info@shidaev.com" className="final-urgent-link">
+                <a
+                  href={siteConfig.contact.emailHref}
+                  className="final-urgent-link"
+                >
                   <EmailIcon />
-                  <span>info@shidaev.com</span>
+                  <span>{siteConfig.contact.email}</span>
                 </a>
               </div>
             </div>

@@ -11,6 +11,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BlogArticle from "@/components/blog/BlogArticle";
 import ArticleJsonLd from "@/components/blog/ArticleJsonLd";
+import { absoluteUrl } from "@/lib/site-config";
 import type { PostFull, PostCard } from "@/sanity/lib/types";
 
 export const revalidate = 60;
@@ -34,7 +35,7 @@ export async function generateMetadata({
     ? urlFor(post.coverImage).width(1200).height(630).fit("crop").url()
     : "/photos/shidaev-black-hero.png";
 
-  const url = `https://shidaev.com/en/blog/${post.slug}`;
+  const url = absoluteUrl(`/en/blog/${post.slug}`);
 
   return {
     title,
@@ -60,7 +61,7 @@ export async function generateMetadata({
       canonical: url,
       languages: post.translation
         ? {
-            "ru-RU": `https://shidaev.com/blog/${post.translation.slug}`,
+            "ru-RU": absoluteUrl(`/blog/${post.translation.slug}`),
           }
         : undefined,
     },

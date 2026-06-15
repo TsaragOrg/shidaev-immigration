@@ -102,12 +102,18 @@
 }
 .story-collapse > summary::-webkit-details-marker { display: none; }
 .story-collapse > summary::marker { content: ''; }
-.story-collapse > summary:hover,
 .story-collapse > summary:focus-visible {
   color: var(--noir);
   border-color: var(--noir);
   background: var(--surface-alt);
   outline: none;
+}
+@media (hover: hover) {
+  .story-collapse > summary:hover {
+    color: var(--noir);
+    border-color: var(--noir);
+    background: var(--surface-alt);
+  }
 }
 .story-collapse[open] > summary { display: none; }
 /* Force always open on desktop */
@@ -161,4 +167,3 @@
   color: var(--slate);
   line-height: 1.5;
 }
-

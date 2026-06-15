@@ -48,10 +48,12 @@
   color: #A8894A;
   transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
 }
-.reviews-nav button:hover {
-  border-color: #A8894A;
-  color: #A8894A;
-  background: var(--white);
+@media (hover: hover) {
+  .reviews-nav button:hover {
+    border-color: #A8894A;
+    color: #A8894A;
+    background: var(--white);
+  }
 }
 
 .reviews-grid {
@@ -96,10 +98,12 @@
   opacity: 0.22;
   pointer-events: none;
 }
-.review-card:hover {
-  border-color: var(--gold);
-  transform: translateY(-4px);
-  box-shadow: 0 24px 60px -32px rgba(119, 90, 25, 0.35);
+@media (hover: hover) {
+  .review-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px -32px rgba(119, 90, 25, 0.35);
+  }
 }
 .review-stars {
   position: relative;
@@ -190,4 +194,3 @@
     border-color: var(--ink);
   }
 }
-

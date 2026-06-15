@@ -13,7 +13,7 @@
 | JSON-LD Article | `src/components/blog/ArticleJsonLd.tsx` (каждый пост) |
 | `<html lang="">` | Корректный для каждой языковой версии |
 | `hreflang` alternate | Между RU/EN зеркалами через `metadata.alternates` |
-| Canonical URL | `https://shidaev.com` зашит (см. `02-стек.md` про текущий статус домена) |
+| Canonical URL | `NEXT_PUBLIC_SITE_URL` через `src/lib/site-config.ts` (сейчас `https://shidaev.com`) |
 | Sitemap включает посты | Через Sanity client в `sitemap.ts` |
 
 ## Целевой Lighthouse SEO

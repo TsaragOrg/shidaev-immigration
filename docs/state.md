@@ -18,6 +18,27 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-06-15 — Публичные интеграционные URL вынесены в config
+
+- **Что меняла:** Добавила `src/lib/site-config.ts` как единый источник для `NEXT_PUBLIC_SITE_URL`, контактных ссылок, адреса, соцсетей, Google Reviews URL, Google Maps iframe, hero fallback image и `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`. Подключила config в Header, Footer, ContactPage, FinalCTA, Reviews, Adversarial, sitemap, robots, metadata, Article JSON-LD и Attorney JSON-LD.
+- **На что опиралась:** `docs/spec.md` § 7/11, `docs/04-функции/формы.md`, `docs/04-функции/seo.md`, `docs/facts/data-to-verify.md`, `src/components/pages/ContactPage.tsx`, `src/components/home/Reviews.tsx`, `src/components/seo/AttorneyJsonLd.tsx`, `src/app/sitemap.ts`, `src/app/robots.ts`.
+- **Что НЕ затронуло:** Legal Notice / Privacy / Terms / Accessibility / Fraud Warning body-тексты и их локальные legal constants; их править только отдельным legal/compliance проходом. Также не меняла фактические значения телефона, email, адреса, соцсетей, Formspree placeholder и Google Reviews fallback.
+- **Открытые вопросы:** `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` всё ещё placeholder; `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` пока generic/fallback; адрес офиса и соцсети требуют подтверждения Jacob/Maga.
+
+### 2026-06-15 — Calendly вынесен в env-конфиг
+
+- **Что меняла:** Убрала hardcoded Calendly URL из `ContactPage`: теперь `/contact` берёт URL из `NEXT_PUBLIC_CALENDLY_URL`, добавляет widget-параметры централизованно в `src/lib/calendly.ts`, а `.env.example` содержит текущий demo URL.
+- **На что опиралась:** `docs/spec.md` § 7/11, `docs/04-функции/запись-на-консультацию.md`, `docs/facts/data-to-verify.md`, `docs/facts/open-questions.md`, `src/components/pages/ContactPage.tsx`, `.env.example`.
+- **Что НЕ затронуло:** Поведение popup, RU/EN тексты страницы, legal/compliance страницы, альтернативные каналы phone/email/WhatsApp, Formspree placeholder.
+- **Открытые вопросы:** Production Calendly всё ещё нужен от Jacob/Maga; при запуске заменить `NEXT_PUBLIC_CALENDLY_URL` в Vercel env на календарь Jacob.
+
+### 2026-06-15 — Hover-эффекты убраны с touch/mobile
+
+- **Что меняла:** Перенесла оставшиеся CSS `:hover`-эффекты в `@media (hover: hover)` в header, hero, reviews, journal, final CTA, practice page, footer, mobile controls и contact channels. Старый `19-touch-hover-reset.css` оставлен как placeholder без touch-hover overrides, чтобы mobile больше не зависел от сбросов после tap.
+- **На что опиралась:** `AGENTS.md`, `/Users/magomedsouleymanov/AGENTS.md`, `/Users/magomedsouleymanov/00_Codex_Knowledge/CURRENT_CONTEXT.md`, `/Users/magomedsouleymanov/00_Codex_Knowledge/ACTIVE_WORK.md`, `docs/spec.md` § 6/8, `.claude/rules/design-system.md`, `docs/04-функции/доступность.md`, `src/styles/README.md`.
+- **Что НЕ затронуло:** React-компоненты, тексты RU/EN, legal/compliance страницы, дизайн-токены, порядок импортов CSS в `src/app/globals.css`.
+- **Открытые вопросы:** нет. Проверено: механический scan подтвердил, что все `:hover` в `src/styles/` находятся внутри `@media (hover: hover)`; `npm run lint` и `npm run build` проходят; локальная проверка в браузере на `390x844` touch показала `hover: none`, на desktop — `hover: hover`.
+
 ### 2026-06-15 — Sanity launch error + image-url warning
 
 - **Что меняла:** Исправила импорт `@sanity/image-url` в `src/sanity/lib/image.ts`: deprecated default export заменён на named export `createImageUrlBuilder`.
@@ -81,7 +102,10 @@
 
 **Передача Jacob (когда боевой запуск):**
 - **Домен `shidaev.com`** — ещё не подключён, инфраструктура на аккаунтах Zouli. При передаче: домен → Jacob, Vercel project → передача, Sanity dataset → передача (или сборка нового на его org).
-- **Calendly URL** — `calendly.com/zulihan1993/30min` (тест). Заменить на календарь Jacob в `src/components/pages/ContactPage.tsx`.
+- **Canonical URL** — `NEXT_PUBLIC_SITE_URL` сейчас указывает на `https://shidaev.com`; проверить Vercel env при подключении домена.
+- **Calendly URL** — `NEXT_PUBLIC_CALENDLY_URL` сейчас указывает на `calendly.com/zulihan1993/30min` (тест). Заменить env-переменную на календарь Jacob.
+- **Form endpoint** — `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` сейчас `https://formspree.io/f/YOUR_FORM_ID`; заменить на рабочий endpoint или убрать form modal.
+- **Google Reviews URL** — `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` пока generic/fallback; заменить на verified GBP URL.
 - **Email `info@shidaev.com`** — статус неизвестен, нужно уточнить работает ли mail provider на домене.
 
 **Текущая работа:**

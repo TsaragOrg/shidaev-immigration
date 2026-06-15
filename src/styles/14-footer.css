@@ -47,12 +47,14 @@
   padding-bottom: 3px;
   transition: color 0.3s ease, border-color 0.3s ease;
 }
-.footer-social a:hover {
-  /* Литерал бронзы, не var(--gold) — токен исторически чёрный (#161616)
-     из монохромной версии. На тёмном фоне footer hover должен быть видимым
-     акцентом, поэтому жёстко прописываем бронзу. */
-  color: #A8894A;
-  border-bottom-color: #A8894A;
+@media (hover: hover) {
+  .footer-social a:hover {
+    /* Литерал бронзы, не var(--gold) — токен исторически чёрный (#161616)
+       из монохромной версии. На тёмном фоне footer hover должен быть видимым
+       акцентом, поэтому жёстко прописываем бронзу. */
+    color: #A8894A;
+    border-bottom-color: #A8894A;
+  }
 }
 .footer-col h5 {
   font-family: var(--sans);
@@ -72,7 +74,9 @@
   color: var(--on-dark-soft);
   transition: color 0.25s ease;
 }
-.footer-col a:hover { color: var(--white); }
+@media (hover: hover) {
+  .footer-col a:hover { color: var(--white); }
+}
 .footer-address {
   font-size: 14px;
   line-height: 1.7;
@@ -109,4 +113,3 @@
     border-bottom-color: #FFFFFF;
   }
 }
-

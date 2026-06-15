@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { calendlyEventUrl, calendlyPopupUrl } from "@/lib/calendly";
+import { siteConfig } from "@/lib/site-config";
 import type { LangProps } from "@/lib/types";
 
 declare global {
@@ -52,7 +54,7 @@ const STRINGS = {
       "Отправка формы не создаёт отношений «адвокат — клиент».",
     closeAria: "Закрыть",
     validationAlert: "Укажите email или телефон — чтобы мы могли с вами связаться.",
-    subject: "Новая заявка с shidaev.com (RU)",
+    subject: `Новая заявка с ${siteConfig.domainDisplay} (RU)`,
   },
   en: {
     pageTitle: "Contact ",
@@ -84,7 +86,7 @@ const STRINGS = {
       "Submitting this form does not create an attorney-client relationship.",
     closeAria: "Close",
     validationAlert: "Provide email or phone — so we can contact you.",
-    subject: "New inquiry from shidaev.com (EN)",
+    subject: `New inquiry from ${siteConfig.domainDisplay} (EN)`,
   },
 } as const;
 
@@ -114,15 +116,11 @@ export default function ContactPage({ lang }: LangProps) {
     e.preventDefault();
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: "https://calendly.com/zulihan1993/30min?primary_color=A8894A&hide_gdpr_banner=1",
+        url: calendlyPopupUrl,
       });
     } else {
       // Fallback — открываем в новой вкладке если виджет не загрузился
-      window.open(
-        "https://calendly.com/zulihan1993/30min",
-        "_blank",
-        "noopener"
-      );
+      window.open(calendlyEventUrl, "_blank", "noopener");
     }
   };
 
@@ -165,7 +163,7 @@ export default function ContactPage({ lang }: LangProps) {
 
               <div className="contact-hero-buttons">
                 <a
-                  href="https://calendly.com/zulihan1993/30min"
+                  href={calendlyEventUrl}
                   onClick={openCalendly}
                   target="_blank"
                   rel="noopener"
@@ -193,7 +191,7 @@ export default function ContactPage({ lang }: LangProps) {
               <p className="contact-channels-lead">{t.channelsLead}</p>
               <div className="contact-channels-list contact-channels-list--simple">
                 <a
-                  href="https://wa.me/14245584141"
+                  href={siteConfig.contact.whatsappUrl}
                   className="contact-channel-row"
                   target="_blank"
                   rel="noopener"
@@ -213,7 +211,10 @@ export default function ContactPage({ lang }: LangProps) {
                   <span className="contact-channel-arrow">→</span>
                 </a>
 
-                <a href="tel:+14245584141" className="contact-channel-row">
+                <a
+                  href={siteConfig.contact.phoneHref}
+                  className="contact-channel-row"
+                >
                   <span className="contact-channel-icon">
                     <svg
                       width="20"
@@ -227,12 +228,14 @@ export default function ContactPage({ lang }: LangProps) {
                       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.86 19.86 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.86 19.86 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8 10a16 16 0 006 6l1.36-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z" />
                     </svg>
                   </span>
-                  <span className="contact-channel-value">+1 (424) 558-4141</span>
+                  <span className="contact-channel-value">
+                    {siteConfig.contact.phoneDisplay}
+                  </span>
                   <span className="contact-channel-arrow">→</span>
                 </a>
 
                 <a
-                  href="mailto:info@shidaev.com"
+                  href={siteConfig.contact.emailHref}
                   className="contact-channel-row"
                 >
                   <span className="contact-channel-icon">
@@ -250,7 +253,7 @@ export default function ContactPage({ lang }: LangProps) {
                     </svg>
                   </span>
                   <span className="contact-channel-value">
-                    info@shidaev.com
+                    {siteConfig.contact.email}
                   </span>
                   <span className="contact-channel-arrow">→</span>
                 </a>
@@ -267,11 +270,11 @@ export default function ContactPage({ lang }: LangProps) {
                 <div className="contact-info-block">
                   <span className="contact-info-label">{t.officeLabel}</span>
                   <address className="contact-info-address">
-                    Valley Executive Tower
+                    {siteConfig.address.building}
                     <br />
-                    15233 Ventura Blvd, Suite 1004
+                    {siteConfig.address.streetAddress}
                     <br />
-                    Sherman Oaks, CA 91403
+                    {siteConfig.address.cityStateZip}
                   </address>
                 </div>
 
@@ -287,7 +290,7 @@ export default function ContactPage({ lang }: LangProps) {
 
               <aside className="contact-map reveal">
                 <iframe
-                  src="https://www.google.com/maps?q=15233+Ventura+Blvd+Suite+1004+Sherman+Oaks+CA+91403&output=embed&z=15"
+                  src={siteConfig.address.mapsEmbedUrl}
                   width="100%"
                   height={320}
                   style={{ border: 0 }}
@@ -343,7 +346,7 @@ export default function ContactPage({ lang }: LangProps) {
 
             <form
               className="contact-form"
-              action="https://formspree.io/f/YOUR_FORM_ID"
+              action={siteConfig.contactFormEndpoint}
               method="POST"
               onSubmit={handleSubmit}
             >
