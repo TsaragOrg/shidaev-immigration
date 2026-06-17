@@ -120,8 +120,6 @@
 }
 
 @media (max-width: 639px) {
-  .contact-form-wrap { padding: 24px 20px; }
-  .contact-form .form-row { grid-template-columns: 1fr; gap: 24px; }
   .final-cta-center { padding: 0 8px; }
   .final-cta-actions { gap: 22px; }
   .final-cta-btn { padding: 18px 28px; width: 100%; justify-content: center; max-width: 360px; }
@@ -133,4 +131,3 @@
   }
   .final-urgent-sep { display: none; }
 }
-

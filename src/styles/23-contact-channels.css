@@ -1,5 +1,5 @@
 /* ============================================================
-   CONTACT CHANNELS — compact list (icons) + form side-by-side
+   CONTACT CHANNELS — compact list (icons)
 ============================================================ */
 
 .contact-channels-section { padding: clamp(20px, 3vw, 40px) 0 clamp(48px, 6vw, 80px); }
@@ -24,13 +24,6 @@
 }
 @media (max-width: 639px) {
   .contact-channels-lead { margin-bottom: 20px; }   /* mobile -12 */
-}
-
-.contact-channels-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: clamp(40px, 5vw, 72px);
-  align-items: start;
 }
 
 .contact-channels-list {
@@ -103,77 +96,6 @@
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* RIGHT: form block */
-.contact-form-block {
-  background: var(--surface);
-  padding: clamp(28px, 3vw, 44px);
-  border: 1px solid var(--hairline);
-}
-.contact-form-block .eyebrow { display: block; margin-bottom: 12px; }
-.contact-form-title {
-  font-family: var(--serif);
-  font-size: clamp(24px, 2.4vw, 32px);
-  line-height: 1.15;
-  color: var(--ink);
-  font-weight: 500;
-  margin: 0 0 14px;
-  letter-spacing: -0.01em;
-}
-.contact-form-title em { font-style: italic; font-weight: 400; }
-.contact-form-lead {
-  font-family: var(--serif);
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--slate);
-  margin: 0 0 28px;
-}
-.contact-form-block .contact-form { gap: 20px; }
-.contact-form-block .form-field input,
-.contact-form-block .form-field textarea,
-.contact-form-block .form-field select {
-  background: var(--white);
-}
-
-/* form-group — «email или телефон» с общим лейблом */
-.form-group { display: flex; flex-direction: column; gap: 10px; }
-.form-group-label {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--slate);
-  font-weight: 700;
-  margin: 0;
-}
-.form-group-note {
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--slate-soft);
-  text-transform: none;
-  font-size: 11px;
-}
-.form-sublabel {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--slate-soft);
-  font-weight: 600;
-}
-.form-help {
-  font-family: var(--serif);
-  font-size: 13px;
-  font-style: italic;
-  color: var(--slate);
-  margin: -8px 0 0;
-}
-
-@media (max-width: 1023px) {
-  .contact-channels-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
 @media (max-width: 639px) {
   .contact-channels-list { gap: 10px; }
   .contact-channel-row {
@@ -194,7 +116,6 @@
   .contact-channel-icon { width: 32px; height: 32px; }
   .contact-channel-value { font-size: 17px; }
   .contact-channel-note { font-size: 13px; }
-  .contact-form-block { padding: 24px 20px; }
 }
 
 .contact-main { padding: clamp(32px, 4vw, 64px) 0 var(--section-y); }
@@ -203,23 +124,6 @@
   grid-template-columns: 1.4fr 1fr;
   gap: clamp(48px, 6vw, 96px);
   align-items: start;
-}
-
-.contact-form-wrap {
-  background: var(--surface);
-  padding: clamp(28px, 4vw, 56px);
-  border: 1px solid var(--hairline);
-}
-.contact-form { display: flex; flex-direction: column; gap: 24px; }
-.contact-form .form-field input,
-.contact-form .form-field textarea,
-.contact-form .form-field select {
-  background: var(--white);
-}
-.contact-form .req {
-  color: #A8894A;
-  font-weight: 400;
-  margin-left: 2px;
 }
 
 .contact-side {

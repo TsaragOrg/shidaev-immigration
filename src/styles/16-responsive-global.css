@@ -221,10 +221,9 @@
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .stat-tile:nth-child(2),
   .stat-tile:nth-child(3) { transform: none; }
-  .story-meta, .form-row { grid-template-columns: 1fr; }
+  .story-meta { grid-template-columns: 1fr; }
   .practice-head, .journal-head { flex-direction: column; align-items: flex-start; gap: 24px; }
   .practice-head-mark { display: none; }
-  .final-form-wrap { padding: 32px 24px; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 56px 0 40px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   .hero-card { padding: 0; }

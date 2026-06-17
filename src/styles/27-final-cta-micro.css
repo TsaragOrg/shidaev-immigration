@@ -21,6 +21,4 @@
   .contact-entry { gap: 32px; }
   .booking-cta,
   .whatsapp-cta { padding: 18px 24px; width: 100%; }
-  .contact-fallback-inner .contact-form { padding: 24px 20px; }
 }
-

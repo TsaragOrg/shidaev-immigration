@@ -1,5 +1,4 @@
 const DEFAULT_SITE_URL = "https://shidaev.com";
-const DEFAULT_CONTACT_FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 const DEFAULT_GOOGLE_REVIEWS_URL =
   "https://www.google.com/search?q=Law+Offices+of+Jacob+Shidaev&kgmid=/g/11vhf_12pq";
 
@@ -24,9 +23,6 @@ export const siteConfig = {
   domainDisplay: "shidaev.com",
   firmName: "Law Offices of Jacob Shidaev",
   heroImagePath: "/photos/shidaev-black-hero.png",
-  contactFormEndpoint:
-    process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT?.trim() ||
-    DEFAULT_CONTACT_FORM_ENDPOINT,
   googleReviewsUrl:
     process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL?.trim() ||
     DEFAULT_GOOGLE_REVIEWS_URL,

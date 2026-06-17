@@ -101,28 +101,7 @@ https://calendly.com/zulihan1993/30min
 
 ---
 
-## 5. Formspree endpoint — ⚠️ ПЛЕЙСХОЛДЕР
-
-Форма «Написать письмо» сейчас НЕ РАБОТАЕТ.
-
-Где:
-- `.env.local` / Vercel env: `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`
-- `.env.example` — пример переменной
-- `src/lib/site-config.ts` — fallback placeholder
-- `src/components/pages/ContactPage.tsx` — form `action`
-
-Текущее:
-```
-action="https://formspree.io/f/YOUR_FORM_ID"
-```
-
-**Что нужно:**
-- Решение от Jacob: Formspree (бесплатно 50/мес) ИЛИ свой `/api/contact` через Resend.
-- Если Formspree: зарегистрироваться, создать form, получить ID, подставить в `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`.
-
----
-
-## 6. Цена консультации `$150 / 30 минут`
+## 5. Цена консультации `$150 / 30 минут`
 
 Где упомянуто:
 - `src/components/home/FinalCTA.tsx:10, 18` — главная final CTA
@@ -134,7 +113,7 @@ action="https://formspree.io/f/YOUR_FORM_ID"
 
 ---
 
-## 7. California State Bar `#343616`
+## 6. California State Bar `#343616`
 
 Где:
 - `src/components/home/Hero.tsx` — eyebrow содержит «Jacob Shidaev · Иммиграционный адвокат» (без номера)
@@ -289,12 +268,11 @@ Design & development · doukhaeva.com
 
 ## Сводка блокеров
 
-Если запускать прямо сейчас, эти 3 пункта НЕ работают:
+Если запускать прямо сейчас, эти 2 пункта НЕ работают:
 
 | # | Что | Где | Эффект |
 |---|-----|-----|--------|
 | 4 | Calendly URL = демо | `NEXT_PUBLIC_CALENDLY_URL` / `src/lib/calendly.ts` fallback | Клиент бронирует мой слот, не Jacob |
-| 5 | Formspree = `YOUR_FORM_ID` | `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` / `src/lib/site-config.ts` fallback | Форма «Написать письмо» → ошибка |
 | 9 | Google Reviews = search URL | `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` / `src/lib/site-config.ts` fallback | Клиент попадает не на тот листинг |
 
 Остальные пункты (соцсети, фото, имена отзывов, биография) — нужно подтвердить, но они не ломают сайт.

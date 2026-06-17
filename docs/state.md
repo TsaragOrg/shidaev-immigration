@@ -18,6 +18,13 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-06-17 — Contact form removed
+
+- **Что меняла:** Убрала с `/contact` модалку «Написать письмо» и весь runtime отправки формы через внешний endpoint. Удалила `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` из `.env.example` и `siteConfig`, убрала Formspree/fallback CSS из глобального bundle, обновила specs/open questions/data-to-verify под решение: контакт только через Calendly, email, phone и WhatsApp.
+- **На что опиралась:** запрос Zouli в текущем чате, `docs/04-функции/формы.md`, `docs/spec.md` § 7, `.claude/rules/design-system.md`, `.claude/rules/content-edit.md`, `src/components/pages/ContactPage.tsx`, `src/lib/site-config.ts`, `src/styles/README.md`.
+- **Что НЕ затронуло:** Calendly popup и `NEXT_PUBLIC_CALENDLY_URL`, прямые `mailto:`/`tel:`/WhatsApp-ссылки, офисная карта, legal body-тексты Legal Notice / Privacy / Terms / Accessibility / Fraud Warning.
+- **Открытые вопросы:** Legal pages всё ещё содержат общие упоминания contact forms; это отдельный legal/compliance проход, если Zouli подтвердит замену формулировок.
+
 ### 2026-06-17 — Consultation payment non-refund clause
 
 - **Что меняла:** Добавила в Terms of Use RU/EN отдельную секцию об оплате консультаций: после завершения платежа оплата консультации не возвращается. Обновила дату Terms на 17 июня 2026.
@@ -55,16 +62,16 @@
 
 ### 2026-06-15 — Публичные интеграционные URL вынесены в config
 
-- **Что меняла:** Добавила `src/lib/site-config.ts` как единый источник для `NEXT_PUBLIC_SITE_URL`, контактных ссылок, адреса, соцсетей, Google Reviews URL, Google Maps iframe, hero fallback image и `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`. Подключила config в Header, Footer, ContactPage, FinalCTA, Reviews, Adversarial, sitemap, robots, metadata, Article JSON-LD и Attorney JSON-LD.
+- **Что меняла:** Добавила `src/lib/site-config.ts` как единый источник для `NEXT_PUBLIC_SITE_URL`, контактных ссылок, адреса, соцсетей, Google Reviews URL, Google Maps iframe и hero fallback image. Подключила config в Header, Footer, ContactPage, FinalCTA, Reviews, Adversarial, sitemap, robots, metadata, Article JSON-LD и Attorney JSON-LD. Form endpoint позже удалён отдельным решением.
 - **На что опиралась:** `docs/spec.md` § 7/11, `docs/04-функции/формы.md`, `docs/04-функции/seo.md`, `docs/facts/data-to-verify.md`, `src/components/pages/ContactPage.tsx`, `src/components/home/Reviews.tsx`, `src/components/seo/AttorneyJsonLd.tsx`, `src/app/sitemap.ts`, `src/app/robots.ts`.
-- **Что НЕ затронуло:** Legal Notice / Privacy / Terms / Accessibility / Fraud Warning body-тексты и их локальные legal constants; их править только отдельным legal/compliance проходом. Также не меняла фактические значения телефона, email, адреса, соцсетей, Formspree placeholder и Google Reviews fallback.
-- **Открытые вопросы:** `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` всё ещё placeholder; `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` пока generic/fallback; адрес офиса и соцсети требуют подтверждения Jacob/Maga.
+- **Что НЕ затронуло:** Legal Notice / Privacy / Terms / Accessibility / Fraud Warning body-тексты и их локальные legal constants; их править только отдельным legal/compliance проходом. Также не меняла фактические значения телефона, email, адреса, соцсетей и Google Reviews fallback.
+- **Открытые вопросы:** `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` пока generic/fallback; адрес офиса и соцсети требуют подтверждения Jacob/Maga.
 
 ### 2026-06-15 — Calendly вынесен в env-конфиг
 
 - **Что меняла:** Убрала hardcoded Calendly URL из `ContactPage`: теперь `/contact` берёт URL из `NEXT_PUBLIC_CALENDLY_URL`, добавляет widget-параметры централизованно в `src/lib/calendly.ts`, а `.env.example` содержит текущий demo URL.
 - **На что опиралась:** `docs/spec.md` § 7/11, `docs/04-функции/запись-на-консультацию.md`, `docs/facts/data-to-verify.md`, `docs/facts/open-questions.md`, `src/components/pages/ContactPage.tsx`, `.env.example`.
-- **Что НЕ затронуло:** Поведение popup, RU/EN тексты страницы, legal/compliance страницы, альтернативные каналы phone/email/WhatsApp, Formspree placeholder.
+- **Что НЕ затронуло:** Поведение popup, RU/EN тексты страницы, legal/compliance страницы, альтернативные каналы phone/email/WhatsApp.
 - **Открытые вопросы:** Production Calendly всё ещё нужен от Jacob/Maga; при запуске заменить `NEXT_PUBLIC_CALENDLY_URL` в Vercel env на календарь Jacob.
 
 ### 2026-06-15 — Hover-эффекты убраны с touch/mobile
@@ -139,7 +146,6 @@
 - **Домен `shidaev.com`** — ещё не подключён, инфраструктура на аккаунтах Zouli. При передаче: домен → Jacob, Vercel project → передача, Sanity dataset → передача (или сборка нового на его org).
 - **Canonical URL** — `NEXT_PUBLIC_SITE_URL` сейчас указывает на `https://shidaev.com`; проверить Vercel env при подключении домена.
 - **Calendly URL** — `NEXT_PUBLIC_CALENDLY_URL` сейчас указывает на `calendly.com/zulihan1993/30min` (тест). Заменить env-переменную на календарь Jacob.
-- **Form endpoint** — `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` сейчас `https://formspree.io/f/YOUR_FORM_ID`; заменить на рабочий endpoint или убрать form modal.
 - **Google Reviews URL** — `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` пока generic/fallback; заменить на verified GBP URL.
 - **Email `info@shidaev.com`** — статус неизвестен, нужно уточнить работает ли mail provider на домене.
 

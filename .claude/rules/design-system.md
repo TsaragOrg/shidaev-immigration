@@ -40,13 +40,12 @@ paths:
 | About — credentials расширенные | `09-about-credentials.css` | "California State Bar — #343616 · действующий член", "American Immigration Lawyers Association (AILA)", "Court admissions" |
 | About — мостик-CTA | `39-about-cta.css` | переход к /practice или /contact |
 | Practice page детальная | `PracticePage.tsx` / `13-practice-page.css` | "A bond hearing is set", "A denial has been issued — appeal to BIA is needed", "Adjustment of status after asylum approval (I-485)", "Appeals to BIA", "Book your initial consultation" |
-| Contact — обёртка страницы | `ContactPage.tsx` / `20-contact-page.css` | "Map of Law Offices of Jacob Shidaev", "Describe your question" |
+| Contact — обёртка страницы | `ContactPage.tsx` / `20-contact-page.css` | "Map of Law Offices of Jacob Shidaev", "Book a consultation" |
 | Contact — intent grid (выбор темы) | `21-intent-grid.css` | (на странице /contact, форматы карточек тем) |
 | Contact — secondary блок | `22-contact-secondary.css` | — |
 | Contact — каналы (тел/email/адрес) | `23-contact-channels.css`, `31-contact-channels-strip.css` | "Mon – Fri · 9:00 AM – 5:00 PM PT", "Message on WhatsApp" |
 | Contact — final CTA compact | `24-final-cta-compact.css` | — |
 | Contact — Calendly booking | `25-contact-booking.css` | "Book a consultation" (на /contact, не Hero) |
-| Contact — fallback форма | `26-contact-form-fallback.css` | "New inquiry from shidaev.com (EN)", "Full name" |
 | Final CTA micro вариант | `27-final-cta-micro.css` | — |
 | Responsive book/contact специфика | `32-responsive-book-contact.css` | — |
 | Blog index | `33-blog-index.css` |

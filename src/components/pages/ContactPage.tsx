@@ -1,13 +1,10 @@
 "use client";
 
 /* ContactPage — страница /contact (обе локали).
-   Hero с 2 CTA (Calendly + Form modal), channels (WhatsApp/phone/email),
-   office + map, form modal внизу.
+   Hero с CTA Calendly, channels (WhatsApp/phone/email), office + map.
 
-   Client Component потому что: form modal state, Calendly popup, form
-   validation, body scroll lock. */
+   Client Component потому что: Calendly popup использует window. */
 
-import { useEffect, useState } from "react";
 import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -30,7 +27,6 @@ const STRINGS = {
     pageTitleEnd: ".",
     consultation: "Консультация 30 минут — $150",
     bookCta: "Записаться на консультацию",
-    writeCta: "Написать письмо",
     channelsLead: "Также можете связаться с нами:",
     waText: "Написать в WhatsApp",
     officeLabel: "Офис",
@@ -38,23 +34,6 @@ const STRINGS = {
     hours: "Пн – Пт · 9:00 – 17:00 PT",
     weekendHours: "Сб – Вс · по записи",
     mapTitle: "Карта офиса Law Offices of Jacob Shidaev",
-    modalTitle: "Опишите ваш ",
-    modalTitleEm: "вопрос",
-    modalTitleEnd: ".",
-    formNameLabel: "Имя и фамилия",
-    formEmailLabel: "Email",
-    formPhoneLabel: "Телефон",
-    formHelp: "Достаточно одного из контактов",
-    formMessageLabel: "Опишите ваш вопрос",
-    formMessagePlaceholder:
-      "Что произошло, какие документы у вас на руках, есть ли судебные даты...",
-    formSubmit: "Отправить заявку",
-    formSla: "Расскажите о своей ситуации. Мы рассмотрим обращение и свяжемся с вами.",
-    formDisclaimer:
-      "Отправка формы не создаёт отношений «адвокат — клиент».",
-    closeAria: "Закрыть",
-    validationAlert: "Укажите email или телефон — чтобы мы могли с вами связаться.",
-    subject: `Новая заявка с ${siteConfig.domainDisplay} (RU)`,
   },
   en: {
     pageTitle: "Contact ",
@@ -62,7 +41,6 @@ const STRINGS = {
     pageTitleEnd: ".",
     consultation: "30-minute consultation — $150",
     bookCta: "Book a consultation",
-    writeCta: "Send a letter",
     channelsLead: "You can also reach us:",
     waText: "Message on WhatsApp",
     officeLabel: "Office",
@@ -70,47 +48,11 @@ const STRINGS = {
     hours: "Mon – Fri · 9:00 AM – 5:00 PM PT",
     weekendHours: "Sat – Sun · by appointment",
     mapTitle: "Map of Law Offices of Jacob Shidaev",
-    modalTitle: "Describe your ",
-    modalTitleEm: "question",
-    modalTitleEnd: ".",
-    formNameLabel: "Full name",
-    formEmailLabel: "Email",
-    formPhoneLabel: "Phone",
-    formHelp: "One of the two is enough",
-    formMessageLabel: "Describe your question",
-    formMessagePlaceholder:
-      "What happened, what documents do you have, are there court dates...",
-    formSubmit: "Submit request",
-    formSla: "Tell us about your situation. We'll review your inquiry and get in touch.",
-    formDisclaimer:
-      "Submitting this form does not create an attorney-client relationship.",
-    closeAria: "Close",
-    validationAlert: "Provide email or phone — so we can contact you.",
-    subject: `New inquiry from ${siteConfig.domainDisplay} (EN)`,
   },
 } as const;
 
 export default function ContactPage({ lang }: LangProps) {
   const t = STRINGS[lang];
-  const [modalOpen, setModalOpen] = useState(false);
-
-  /* Lock body scroll когда модальное окно открыто */
-  useEffect(() => {
-    document.body.style.overflow = modalOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [modalOpen]);
-
-  /* Закрыть модалку на ESC */
-  useEffect(() => {
-    if (!modalOpen) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setModalOpen(false);
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, [modalOpen]);
 
   const openCalendly = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -121,17 +63,6 @@ export default function ContactPage({ lang }: LangProps) {
     } else {
       // Fallback — открываем в новой вкладке если виджет не загрузился
       window.open(calendlyEventUrl, "_blank", "noopener");
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const form = e.currentTarget;
-    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value.trim();
-    const phone = (form.elements.namedItem("phone") as HTMLInputElement)?.value.trim();
-    if (!email && !phone) {
-      e.preventDefault();
-      alert(t.validationAlert);
-      return false;
     }
   };
 
@@ -172,13 +103,6 @@ export default function ContactPage({ lang }: LangProps) {
                   {t.bookCta}
                   <span className="arrow">→</span>
                 </a>
-                <button
-                  type="button"
-                  className="contact-hero-btn contact-hero-btn--outline"
-                  onClick={() => setModalOpen(true)}
-                >
-                  {t.writeCta}
-                </button>
               </div>
             </div>
           </div>
@@ -305,114 +229,6 @@ export default function ContactPage({ lang }: LangProps) {
         </section>
       </main>
       <Footer lang={lang} />
-
-      {/* FORM MODAL */}
-      <div
-        className="form-modal"
-        id="formModal"
-        aria-hidden={!modalOpen}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="formModalTitle"
-      >
-        <div
-          className="form-modal-backdrop"
-          onClick={() => setModalOpen(false)}
-        ></div>
-        <div className="form-modal-content">
-          <button
-            type="button"
-            className="form-modal-close"
-            onClick={() => setModalOpen(false)}
-            aria-label={t.closeAria}
-          >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-            >
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
-          <div className="form-modal-inner">
-            <h2 id="formModalTitle" className="form-modal-title">
-              {t.modalTitle}
-              <em>{t.modalTitleEm}</em>
-              {t.modalTitleEnd}
-            </h2>
-
-            <form
-              className="contact-form"
-              action={siteConfig.contactFormEndpoint}
-              method="POST"
-              onSubmit={handleSubmit}
-            >
-              <input type="hidden" name="_subject" value={t.subject} />
-              <input type="hidden" name="_language" value={lang.toUpperCase()} />
-
-              <div className="form-field">
-                <label htmlFor="modal-full-name">
-                  {t.formNameLabel} <span className="req">*</span>
-                </label>
-                <input
-                  id="modal-full-name"
-                  name="full_name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                />
-              </div>
-
-              <div className="form-row">
-                <div className="form-field">
-                  <label htmlFor="modal-email">{t.formEmailLabel}</label>
-                  <input
-                    id="modal-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <div className="form-field">
-                  <label htmlFor="modal-phone">{t.formPhoneLabel}</label>
-                  <input
-                    id="modal-phone"
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel"
-                    placeholder="+1 (___) ___-____"
-                  />
-                </div>
-              </div>
-              <p className="form-help">{t.formHelp}</p>
-
-              <div className="form-field">
-                <label htmlFor="modal-message">
-                  {t.formMessageLabel} <span className="req">*</span>
-                </label>
-                <textarea
-                  id="modal-message"
-                  name="message"
-                  placeholder={t.formMessagePlaceholder}
-                  rows={5}
-                  required
-                />
-              </div>
-
-              <button type="submit" className="form-submit">
-                {t.formSubmit}
-              </button>
-
-              <p className="form-sla">{t.formSla}</p>
-              <p className="form-disclaimer">{t.formDisclaimer}</p>
-            </form>
-          </div>
-        </div>
-      </div>
     </>
   );
 }

@@ -99,7 +99,7 @@
 | Framework | Next.js | 16.2.x (App Router) |
 | UI runtime | React | 19.2 |
 | Язык | TypeScript | strict |
-| Стили — основа | Свой CSS-split | 41 файл в `src/styles/` |
+| Стили — основа | Свой CSS-split | 38 файлов в `src/styles/` |
 | Стили — утилиты | Tailwind v4 | для ad-hoc spacing/layout в JSX |
 | CMS (блог) | Sanity | v5, Studio на `/studio` |
 | Хостинг | Vercel | auto-deploy с `main` |
@@ -119,7 +119,6 @@
 | Интеграция | Что делает | Как встроена |
 |---|---|---|
 | Calendly | Запись на консультацию | Popup-режим только на `/contact` (с других страниц CTA ведут на `/contact`). URL задаётся через `NEXT_PUBLIC_CALENDLY_URL`. Детали — `docs/04-функции/запись-на-консультацию.md`. |
-| Contact form endpoint | Модалка «Написать письмо» | `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`; сейчас placeholder Formspree, не production-ready. |
 | `mailto:` | Email | Прямые ссылки на `info@shidaev.com` |
 | `tel:` | Звонок | Клик-в-звонок `+14245584141` |
 | WhatsApp | Тот же номер | Срочный канал, открывается ссылкой |
@@ -127,6 +126,7 @@
 
 **НЕ интегрировано:**
 - Custom form submission backend — нет.
+- External form endpoint / Formspree — нет.
 - Платежи (Stripe/PayPal) — нет.
 - Live chat / интерком — нет.
 - Email-маркетинг (Mailchimp/ConvertKit) — нет.
