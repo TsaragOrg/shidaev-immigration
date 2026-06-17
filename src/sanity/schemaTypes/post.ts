@@ -1,4 +1,89 @@
-import { defineField, defineType } from "sanity";
+import {
+  defineField,
+  defineType,
+  type SlugIsUniqueValidator,
+  type SlugValue,
+  type ValidationContext,
+} from "sanity";
+
+import { apiVersion } from "../env";
+
+interface PostDocumentForValidation {
+  _id?: string;
+  language?: "ru" | "en";
+  translation?: { _ref?: string };
+}
+
+function publishedId(id: string): string {
+  return id.replace(/^drafts\./, "");
+}
+
+function draftId(id: string): string {
+  return `drafts.${publishedId(id)}`;
+}
+
+function postDocument(doc: unknown): PostDocumentForValidation | null {
+  return doc && typeof doc === "object"
+    ? (doc as PostDocumentForValidation)
+    : null;
+}
+
+const isPostSlugUniqueByLanguage: SlugIsUniqueValidator = async (
+  slug,
+  context
+) => {
+  const doc = postDocument(context.document);
+  if (!doc?._id || !doc.language) {
+    return context.defaultIsUnique(slug, context);
+  }
+
+  const id = publishedId(doc._id);
+  const client = context.getClient({ apiVersion });
+
+  return client.fetch(
+    `!defined(*[
+      _type == "post"
+      && slug.current == $slug
+      && language == $language
+      && !(_id in [$draftId, $publishedId])
+    ][0]._id)`,
+    {
+      slug,
+      language: doc.language,
+      draftId: draftId(id),
+      publishedId: id,
+    }
+  );
+};
+
+async function validatePostSlug(
+  slug: SlugValue | undefined,
+  context: ValidationContext
+) {
+  if (slug?.current) return true;
+
+  const doc = postDocument(context.document);
+  const translationRef = doc?.translation?._ref;
+  if (!translationRef) {
+    return "Slug is required. Click Generate, or link this post to a translation so the slug can be copied automatically.";
+  }
+
+  const linkedSlug = await context.getClient({ apiVersion }).fetch<string | null>(
+    `coalesce(
+      *[_id == $draftId][0].slug.current,
+      *[_id == $publishedId][0].slug.current
+    )`,
+    {
+      draftId: draftId(translationRef),
+      publishedId: publishedId(translationRef),
+    }
+  );
+
+  return (
+    Boolean(linkedSlug) ||
+    "The linked translation has no slug yet. Add a slug there first, then publish this post."
+  );
+}
 
 /* Post — публикация блога. Bilingual через language + translation ref.
 
@@ -45,9 +130,14 @@ export default defineType({
       name: "slug",
       title: "Slug (URL)",
       type: "slug",
-      options: { source: "title", maxLength: 96 },
-      description: "Адрес статьи в URL. Жми Generate — сгенерируется из заголовка.",
-      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        maxLength: 96,
+        isUnique: isPostSlugUniqueByLanguage,
+      },
+      description:
+        "Адрес статьи в URL. Жми Generate. Если это перевод — выбери Translation of, и slug автоматически скопируется у связанной статьи при Publish.",
+      validation: (Rule) => Rule.custom(validatePostSlug),
     }),
     defineField({
       name: "language",
@@ -350,9 +440,10 @@ export default defineType({
       title: "Translation of",
       type: "reference",
       to: [{ type: "post" }],
+      weak: true,
       fieldset: "advanced",
       description:
-        "Если у статьи есть версия на другом языке — выбери её. Тогда на странице статьи появится кнопка переключения.",
+        "Если у статьи есть версия на другом языке — выбери её. Тогда на странице статьи появится кнопка переключения. Связь слабая: удаление одной версии не блокируется другой.",
     }),
     defineField({
       name: "updatedAt",

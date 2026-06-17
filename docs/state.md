@@ -18,6 +18,13 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-06-17 — Sanity blog translation slug sync
+
+- **Что меняла:** Обновила Sanity-схему `post`: slug теперь уникален внутри одного языка, но может совпадать у RU/EN перевода. `translation` переведён в weak reference, чтобы связь перевода не блокировала удаление статьи. Расширила `autoLinkTranslations`: при Publish связанная пара публикаций получает общий slug, обратная `translation` reference проставляется автоматически и записывается слабой ссылкой. При Delete Studio сначала снимает `translation` у связанных статей, затем удаляет выбранную публикацию. Для переводов slug можно не заполнять вручную, если выбран `Translation of` на статью со slug.
+- **На что опиралась:** `docs/04-функции/блог.md`, `docs/04-функции/i18n.md`, `docs/spec.md` § 6, `.claude/rules/design-system.md`, `src/sanity/schemaTypes/post.ts`, `src/sanity/plugins/autoLinkTranslations.ts`, `src/components/blog/BlogArticle.tsx`, `src/app/(site)/blog/[slug]/page.tsx`, `src/app/(site)/en/blog/[slug]/page.tsx`, `docs/for-jacob/sanity-guide.md`.
+- **Что НЕ затронуло:** Публичный дизайн статьи, GROQ-запросы чтения, legal/compliance страницы, тексты статических RU/EN страниц, категории, авторы, sitemap.
+- **Открытые вопросы:** Для уже опубликованных старых пар с разными slug нужно один раз переопубликовать одну из связанных статей или вручную выровнять slug в Studio. Для удаления старых пар достаточно использовать обновлённую Studio: delete-action снимет старую hard reference перед удалением.
+
 ### 2026-06-15 — Mobile hero/about images optimized
 
 - **Что меняла:** Заменила прямые mobile `srcSet` на lightweight WebP variants: `shidaev-mobile-hero-800/1200.webp` и `shidaev-about-mobile-800/1200.webp`. Удалила старые PNG `shidaev-mobile-hero.png` (7.0 MB) и `shidaev-about-mobile.png` (3.3 MB), которые браузер скачивал напрямую мимо `next/image`. Убрала `priority` preload с desktop fallback hero image, чтобы mobile не запрашивал лишнюю desktop-картинку.
