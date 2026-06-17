@@ -12,7 +12,7 @@ const CONTACT_EMAIL = "info@shidaev.com";
 export const termsRu: LegalContent = {
   eyebrow: "Правовая информация",
   title: "Условия использования",
-  lastUpdated: "Последнее обновление: 1 июня 2026 г.",
+  lastUpdated: "Последнее обновление: 17 июня 2026 г.",
   intro:
     "Используя сайт shidaev.com, вы соглашаетесь с настоящими условиями. Если вы не согласны с любым из положений — не используйте сайт.",
   sections: [
@@ -56,6 +56,12 @@ export const termsRu: LegalContent = {
       ],
     },
     {
+      title: "Оплата консультаций",
+      body: [
+        "Оплата консультации не возвращается после завершения платежа.",
+      ],
+    },
+    {
       title: "Ссылки на сторонние ресурсы",
       body: [
         "Сайт может содержать ссылки на сторонние ресурсы. Фирма не отвечает за их содержание и не подтверждает достоверность размещённой там информации.",
@@ -93,7 +99,7 @@ export const termsRu: LegalContent = {
 export const termsEn: LegalContent = {
   eyebrow: "Legal",
   title: "Terms of Use",
-  lastUpdated: "Last updated: June 1, 2026",
+  lastUpdated: "Last updated: June 17, 2026",
   intro:
     "By using shidaev.com you agree to these Terms of Use. If you do not agree with any provision, please discontinue your use of the site.",
   sections: [
@@ -134,6 +140,12 @@ export const termsEn: LegalContent = {
       title: "User submissions",
       body: [
         "Information sent through contact forms is treated as a submission for the purpose of evaluating possible representation. Do not transmit confidential material before a written engagement agreement is in place. Processing of personal data is described in the <a href=\"/en/privacy\">Privacy Policy</a>.",
+      ],
+    },
+    {
+      title: "Consultation payments",
+      body: [
+        "Consultation payments are non-refundable once payment has been completed.",
       ],
     },
     {

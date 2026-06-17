@@ -18,6 +18,13 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-06-17 — Consultation payment non-refund clause
+
+- **Что меняла:** Добавила в Terms of Use RU/EN отдельную секцию об оплате консультаций: после завершения платежа оплата консультации не возвращается. Обновила дату Terms на 17 июня 2026.
+- **На что опиралась:** подтверждение Zouli в текущем чате, `AGENTS.md` legal/compliance stop, `docs/04-функции/юридические-страницы.md`, `.claude/rules/content-edit.md`, `src/lib/legal/terms.ts`.
+- **Что НЕ затронуло:** Legal Notice, Privacy Policy, Accessibility Statement, Fraud Warning, admissions/pro hac vice формулировки, no attorney-client relationship disclaimer, публичные CTA и Calendly/payment integration.
+- **Открытые вопросы:** нет.
+
 ### 2026-06-17 — Blog translation slug fallback
 
 - **Что меняла:** Упростила workflow переводов в Sanity: slug теперь обязателен только у первой языковой версии. Если у перевода slug пустой, публичные blog queries, detail route, language switch, related posts, latest posts и sitemap используют slug связанной статьи через `translation->slug.current`.
