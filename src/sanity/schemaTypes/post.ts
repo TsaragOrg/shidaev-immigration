@@ -65,7 +65,7 @@ async function validatePostSlug(
   const doc = postDocument(context.document);
   const translationRef = doc?.translation?._ref;
   if (!translationRef) {
-    return "Slug is required. Click Generate, or link this post to a translation so the slug can be copied automatically.";
+    return "Slug is required for the first language version. For a translation, select Translation of and the site will use the linked article slug.";
   }
 
   const linkedSlug = await context.getClient({ apiVersion }).fetch<string | null>(
@@ -81,7 +81,7 @@ async function validatePostSlug(
 
   return (
     Boolean(linkedSlug) ||
-    "The linked translation has no slug yet. Add a slug there first, then publish this post."
+    "The linked article has no slug yet. Add a slug to the first language version, then publish this translation."
   );
 }
 
@@ -136,7 +136,7 @@ export default defineType({
         isUnique: isPostSlugUniqueByLanguage,
       },
       description:
-        "Адрес статьи в URL. Жми Generate. Если это перевод — выбери Translation of, и slug автоматически скопируется у связанной статьи при Publish.",
+        "Адрес статьи в URL. Для первой версии жми Generate. Для перевода можно оставить пустым: выбери Translation of, и сайт возьмёт slug у связанной статьи.",
       validation: (Rule) => Rule.custom(validatePostSlug),
     }),
     defineField({

@@ -14,6 +14,7 @@
 | `<html lang="">` | Корректный для каждой языковой версии |
 | `hreflang` alternate | Между RU/EN зеркалами через `metadata.alternates` |
 | Canonical URL | `NEXT_PUBLIC_SITE_URL` через `src/lib/site-config.ts` (сейчас `https://shidaev.com`) |
+| Favicon / app icon | `src/app/favicon.ico`, `src/app/icon.svg`, `src/app/apple-icon.png` + `metadata.icons` |
 | Sitemap включает посты | Через Sanity client в `sitemap.ts` |
 
 ## Целевой Lighthouse SEO

@@ -18,6 +18,20 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-06-17 — Blog translation slug fallback
+
+- **Что меняла:** Упростила workflow переводов в Sanity: slug теперь обязателен только у первой языковой версии. Если у перевода slug пустой, публичные blog queries, detail route, language switch, related posts, latest posts и sitemap используют slug связанной статьи через `translation->slug.current`.
+- **На что опиралась:** `docs/04-функции/блог.md`, `docs/04-функции/i18n.md`, `docs/for-jacob/sanity-guide.md`, `src/sanity/lib/queries.ts`, `src/app/sitemap.ts`, `src/sanity/schemaTypes/post.ts`, реальная Sanity-пара `first-immigration-consultation` EN/RU.
+- **Что НЕ затронуло:** Тексты статей, категории, Sanity dataset content после ручной фиксации текущей пары, legal/compliance pages, публичный дизайн карточек/статьи.
+- **Открытые вопросы:** нет. Официальный workflow: создать первую версию с Generate slug → создать перевод → выбрать `Translation of` → Publish.
+
+### 2026-06-17 — Favicon and app icons
+
+- **Что меняла:** Добавила новый favicon в фирменном регистре Shidaev: SVG source `src/app/icon.svg`, Apple touch icon `src/app/apple-icon.png`, обновлённый multi-size `src/app/favicon.ico`. Подключила иконки явно через `metadata.icons` в публичном site layout.
+- **На что опиралась:** `docs/04-функции/seo.md`, `docs/04-функции/i18n.md`, `docs/spec.md` § 4/6, `.claude/rules/design-system.md`, `src/styles/00-tokens-base.css`, `src/app/(site)/layout.tsx`, текущий `src/app/favicon.ico`.
+- **Что НЕ затронуло:** Open Graph images, Twitter cards, sitemap/robots, legal/compliance pages, Sanity Studio metadata, публичные тексты RU/EN.
+- **Открытые вопросы:** нет.
+
 ### 2026-06-17 — Sanity blog translation slug sync
 
 - **Что меняла:** Обновила Sanity-схему `post`: slug теперь уникален внутри одного языка, но может совпадать у RU/EN перевода. `translation` переведён в weak reference, чтобы связь перевода не блокировала удаление статьи. Расширила `autoLinkTranslations`: при Publish связанная пара публикаций получает общий slug, обратная `translation` reference проставляется автоматически и записывается слабой ссылкой. При Delete Studio сначала снимает `translation` у связанных статей, затем удаляет выбранную публикацию. Для переводов slug можно не заполнять вручную, если выбран `Translation of` на статью со slug.

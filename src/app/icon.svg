@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Law Offices of Jacob Shidaev">
+  <rect width="512" height="512" rx="108" fill="#161616"/>
+  <rect x="28" y="28" width="456" height="456" rx="88" fill="none" stroke="#8E8882" stroke-width="14"/>
+  <path d="M256 76v52M210 128h92M184 154h144M256 128v78" fill="none" stroke="#FAFAF9" stroke-width="16" stroke-linecap="round"/>
+  <path d="M178 172l-40 58h80l-40-58ZM334 172l-40 58h80l-40-58Z" fill="none" stroke="#8E8882" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M116 232h124M272 232h124" stroke="#FAFAF9" stroke-width="10" stroke-linecap="round" opacity=".86"/>
+  <text x="256" y="356" text-anchor="middle" fill="#FAFAF9" font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="700" letter-spacing="-8">JS</text>
+  <path d="M150 390h212" stroke="#8E8882" stroke-width="12" stroke-linecap="round"/>
+</svg>

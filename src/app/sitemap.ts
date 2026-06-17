@@ -14,8 +14,8 @@ interface PostSitemapItem {
 }
 
 const POSTS_FOR_SITEMAP = groq`
-  *[_type == "post" && defined(slug.current)] {
-    "slug": slug.current,
+  *[_type == "post" && defined(coalesce(slug.current, translation->slug.current))] {
+    "slug": coalesce(slug.current, translation->slug.current),
     language,
     publishedAt,
     updatedAt

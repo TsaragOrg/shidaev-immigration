@@ -33,7 +33,7 @@ const CATEGORY_PROJECTION = `
 const POST_CARD_PROJECTION = `
   _id,
   title,
-  "slug": slug.current,
+  "slug": coalesce(slug.current, translation->slug.current),
   language,
   deck,
   excerpt,
@@ -55,7 +55,7 @@ const POST_CARD_PROJECTION = `
 const POST_FULL_PROJECTION = `
   _id,
   title,
-  "slug": slug.current,
+  "slug": coalesce(slug.current, translation->slug.current),
   language,
   deck,
   excerpt,
@@ -70,7 +70,7 @@ const POST_FULL_PROJECTION = `
   "translation": translation->{
     _id,
     title,
-    "slug": slug.current,
+    "slug": coalesce(slug.current, ^.slug.current),
     language
   }
 `;
@@ -81,7 +81,11 @@ const POST_FULL_PROJECTION = `
 
 /* Все опубликованные посты выбранного языка, сортировка по дате (новые сверху). */
 export const POSTS_BY_LANG_QUERY = groq`
-  *[_type == "post" && language == $lang && defined(slug.current)]
+  *[
+    _type == "post"
+    && language == $lang
+    && defined(coalesce(slug.current, translation->slug.current))
+  ]
     | order(featured desc, publishedAt desc) {
     ${POST_CARD_PROJECTION}
   }
@@ -96,7 +100,11 @@ export const CATEGORIES_QUERY = groq`
 
 /* Один пост по slug + language. Возвращает полное тело + связанный перевод. */
 export const POST_BY_SLUG_QUERY = groq`
-  *[_type == "post" && slug.current == $slug && language == $lang][0] {
+  *[
+    _type == "post"
+    && coalesce(slug.current, translation->slug.current) == $slug
+    && language == $lang
+  ][0] {
     ${POST_FULL_PROJECTION}
   }
 `;
@@ -107,6 +115,7 @@ export const RELATED_POSTS_QUERY = groq`
     _type == "post"
     && language == $lang
     && _id != $excludeId
+    && defined(coalesce(slug.current, translation->slug.current))
     && count(categories[@._ref in $categoryIds]) > 0
   ] | order(publishedAt desc)[0...2] {
     ${POST_CARD_PROJECTION}
@@ -117,7 +126,11 @@ export const RELATED_POSTS_QUERY = groq`
    Берём 3: первая — featured большой блок, две следующие —
    вторичные карточки рядом. Все три адаптируются и с фото, и без. */
 export const LATEST_POSTS_QUERY = groq`
-  *[_type == "post" && language == $lang && defined(slug.current)]
+  *[
+    _type == "post"
+    && language == $lang
+    && defined(coalesce(slug.current, translation->slug.current))
+  ]
     | order(publishedAt desc)[0...3] {
     ${POST_CARD_PROJECTION}
   }

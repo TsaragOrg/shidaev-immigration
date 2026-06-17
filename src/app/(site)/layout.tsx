@@ -48,6 +48,13 @@ export const metadata: Metadata = {
       "Иммиграционный адвокат с судебным подходом к каждому делу. Asylum, removal defense, federal courts.",
     images: ["/photos/shidaev-black-hero.png"],
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   /* SEO базовое */
   alternates: {
     canonical: "/",
