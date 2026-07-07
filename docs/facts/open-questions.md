@@ -89,7 +89,7 @@ Zouli — приглашённый коллаборатор на время ра
 
 - Jacob регистрируется на calendly.com (или office manager)
 - Подключает Google Calendar Jacob'а
-- Stripe (для предоплаты $150) — Standard план $12/мес
+- Stripe/платёжный сервис (для предоплаты $50) — тариф и совместимость подтвердить отдельно
 - Создаёт event «30-minute consultation»
 - Присылает URL — я меняю `NEXT_PUBLIC_CALENDLY_URL` в Vercel env и локальном `.env.local`
 

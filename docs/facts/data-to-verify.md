@@ -101,15 +101,14 @@ https://calendly.com/zulihan1993/30min
 
 ---
 
-## 5. Цена консультации `$150 / 30 минут`
+## 5. Цена консультации `$50 / 30 минут`
 
 Где упомянуто:
-- `src/components/home/FinalCTA.tsx:10, 18` — главная final CTA
-- `src/components/pages/AboutPage.tsx:48, 111` — about CTA
-- `src/components/pages/PracticePage.tsx:167, 328` — practice final
-- `src/components/pages/ContactPage.tsx:29, 61` — contact hero meta
+- `.env.example` — `NEXT_PUBLIC_CONSULTATION_PRICE_USD=50`
+- `src/lib/consultation.ts` — fallback и форматирование цены
+- `src/components/pages/ContactPage.tsx` — contact hero meta
 
-**Проверить:** цена актуальная?
+**Проверить перед запуском:** цена в Calendly/платёжном сервисе совпадает с `NEXT_PUBLIC_CONSULTATION_PRICE_USD`.
 
 ---
 

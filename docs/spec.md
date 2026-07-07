@@ -185,6 +185,7 @@
 | **Vercel project** | `shidaev-immigration` | Zouli |
 | **Sanity Studio** | `/studio` на проде, project ID в `.env.local` | Zouli |
 | **Calendly** | `NEXT_PUBLIC_CALENDLY_URL` = `calendly.com/zulihan1993/30min` | Zouli (тест) |
+| **Consultation price** | `NEXT_PUBLIC_CONSULTATION_PRICE_USD` = `50` | Public display on `/contact` |
 
 В коде (`robots.ts`, `sitemap.ts`, `metadataBase`, JSON-LD) canonical URL берётся из `NEXT_PUBLIC_SITE_URL` через `src/lib/site-config.ts`. После подключения домена нужно проверить Vercel env, а не искать URL по компонентам.
 

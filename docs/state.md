@@ -18,6 +18,13 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-07-07 — Consultation price moved to env
+
+- **Что меняла:** Цена 30-минутной консультации на `/contact` теперь берётся из `NEXT_PUBLIC_CONSULTATION_PRICE_USD` с fallback `$50`. Добавила `src/lib/consultation.ts`, обновила RU/EN строки ContactPage, `.env.example`, booking spec и список проверок перед запуском.
+- **На что опиралась:** `AGENTS.md`, `.claude/rules/design-system.md`, `.claude/rules/content-edit.md`, `docs/facts/project-facts.md`, `docs/04-функции/i18n.md`, `docs/04-функции/запись-на-консультацию.md`, `docs/facts/data-to-verify.md`, `docs/facts/open-questions.md`, `docs/spec.md`, `src/components/pages/ContactPage.tsx`, `src/lib/calendly.ts`, `.env.example`.
+- **Что НЕ затронуло:** Calendly event URL и popup-поведение, главная/About/Practice CTA без цены, legal/compliance body-тексты, реальные настройки Calendly/Stripe/LawPay вне сайта.
+- **Открытые вопросы:** Перед запуском Vercel env и платёжный/Calendly event должны иметь ту же цену `50`.
+
 ### 2026-06-17 — Contact form removed
 
 - **Что меняла:** Убрала с `/contact` модалку «Написать письмо» и весь runtime отправки формы через внешний endpoint. Удалила `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` из `.env.example` и `siteConfig`, убрала Formspree/fallback CSS из глобального bundle, обновила specs/open questions/data-to-verify под решение: контакт только через Calendly, email, phone и WhatsApp.

@@ -9,6 +9,7 @@ import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { calendlyEventUrl, calendlyPopupUrl } from "@/lib/calendly";
+import { consultationPriceDisplay } from "@/lib/consultation";
 import { siteConfig } from "@/lib/site-config";
 import type { LangProps } from "@/lib/types";
 
@@ -25,7 +26,7 @@ const STRINGS = {
     pageTitle: "Связаться ",
     pageTitleEm: "с офисом",
     pageTitleEnd: ".",
-    consultation: "Консультация 30 минут — $150",
+    consultation: `Консультация 30 минут — ${consultationPriceDisplay}`,
     bookCta: "Записаться на консультацию",
     channelsLead: "Также можете связаться с нами:",
     waText: "Написать в WhatsApp",
@@ -39,7 +40,7 @@ const STRINGS = {
     pageTitle: "Contact ",
     pageTitleEm: "the office",
     pageTitleEnd: ".",
-    consultation: "30-minute consultation — $150",
+    consultation: `30-minute consultation — ${consultationPriceDisplay}`,
     bookCta: "Book a consultation",
     channelsLead: "You can also reach us:",
     waText: "Message on WhatsApp",
