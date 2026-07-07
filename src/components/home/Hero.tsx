@@ -1,12 +1,13 @@
 /* Hero — первый экран главной.
-   Серверный компонент (нет интерактивности). Стили из globals.css.
+   Серверный компонент. Calendly CTA вынесен в маленький client component.
+   Стили из globals.css.
 
    Картинки оптимизированы через next/image — отдаются в нужном формате
    и размере автоматически. Hero — fetchpriority="high" чтобы рендерилось
    первым (LCP — Largest Contentful Paint оптимизация). */
 
 import Image from "next/image";
-import Link from "next/link";
+import CalendlyBookingButton from "@/components/booking/CalendlyBookingButton";
 import type { LangProps } from "@/lib/types";
 
 const STRINGS = {
@@ -18,7 +19,6 @@ const STRINGS = {
     leadEm: "Представляем клиентов во всех 50 штатах.",
     cta: "Записаться на консультацию",
     strip: ["Убежище", "Иммиграционный суд", "Федеральные суды", "Помощь задержанным"],
-    contactHref: "/contact",
     photoAlt: "Jacob Shidaev — иммиграционный адвокат, Лос-Анджелес",
   },
   en: {
@@ -29,7 +29,6 @@ const STRINGS = {
     leadEm: "We represent clients in all 50 states.",
     cta: "Book a consultation",
     strip: ["Asylum", "Immigration Court", "Federal Litigation", "Detained Representation"],
-    contactHref: "/en/contact",
     photoAlt: "Jacob Shidaev — immigration attorney, Los Angeles",
   },
 } as const;
@@ -88,10 +87,10 @@ export default function Hero({ lang }: LangProps) {
           </p>
 
           <div className="hero-card-actions">
-            <Link href={t.contactHref} className="btn btn-shimmer">
+            <CalendlyBookingButton className="btn btn-shimmer">
               {t.cta}
               <span className="arrow">→</span>
-            </Link>
+            </CalendlyBookingButton>
           </div>
 
           <div className="hero-card-strip">

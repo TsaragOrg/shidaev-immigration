@@ -4,7 +4,7 @@
 
 | Имя | Что |
 |---|---|
-| `запись-на-консультацию.md` | Calendly popup на `/contact` |
+| `запись-на-консультацию.md` | Calendly popup из Hero и на `/contact` |
 | `i18n.md` | Билингв RU/EN через зеркальные роуты |
 | `блог.md` | Sanity-managed публикации |
 | `выбор-темы-обращения.md` | Intent grid на `/contact` |

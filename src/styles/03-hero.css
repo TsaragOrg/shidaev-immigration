@@ -163,6 +163,8 @@
   padding: 18px 28px;
   box-shadow: 0 14px 36px -10px rgba(168, 137, 74, 0.32);
   transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  appearance: none;
 }
 .btn-shimmer .arrow { color: #A8894A; transition: color 0.3s ease, transform 0.3s ease; }
 /* Hover — инверсия в бронзу + лёгкий lift */

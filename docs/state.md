@@ -18,6 +18,13 @@
 
 ## Журнал изменений (формат 6 полей для закрытия этапов, 4 поля для обычных правок)
 
+### 2026-07-07 — Home Hero opens Calendly directly
+
+- **Что меняла:** Hero CTA на главной больше не ведёт на `/contact`: он открывает Calendly popup напрямую. Вынесла общую Calendly-логику в `src/components/booking/CalendlyBookingButton.tsx` и загрузку widget assets в `CalendlyWidgetAssets.tsx`; `/contact` использует тот же CTA-компонент. CTA рендерится как `button`, чтобы клик не запускал внешний navigation/loading state сайта перед popup. Обновила specs/facts/design catalog под новый поток.
+- **На что опиралась:** запрос Zouli в текущем чате, `docs/04-функции/запись-на-консультацию.md`, `docs/spec.md` § 7, `docs/facts/project-facts.md`, `docs/04-функции/i18n.md`, `.claude/rules/design-system.md`, `.claude/rules/content-edit.md`, `src/components/home/Hero.tsx`, `src/components/pages/ContactPage.tsx`, `src/lib/calendly.ts`.
+- **Что НЕ затронуло:** FinalCTA/About/Practice/Blog CTA всё ещё ведут на `/contact`; Calendly URL/env, consultation price env, phone/email/WhatsApp fallback, legal/compliance pages и внешний payment setup.
+- **Открытые вопросы:** Если Jacob захочет, чтобы все CTA открывали Calendly напрямую, отдельно расширить поведение на остальные компоненты.
+
 ### 2026-07-07 — Consultation price moved to env
 
 - **Что меняла:** Цена 30-минутной консультации на `/contact` теперь берётся из `NEXT_PUBLIC_CONSULTATION_PRICE_USD` с fallback `$50`. Добавила `src/lib/consultation.ts`, обновила RU/EN строки ContactPage, `.env.example`, booking spec и список проверок перед запуском.

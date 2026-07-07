@@ -1,25 +1,15 @@
-"use client";
-
 /* ContactPage — страница /contact (обе локали).
    Hero с CTA Calendly, channels (WhatsApp/phone/email), office + map.
 
-   Client Component потому что: Calendly popup использует window. */
+   Серверный компонент. Calendly CTA вынесен в маленький client component. */
 
-import Script from "next/script";
+import CalendlyBookingButton from "@/components/booking/CalendlyBookingButton";
+import CalendlyWidgetAssets from "@/components/booking/CalendlyWidgetAssets";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { calendlyEventUrl, calendlyPopupUrl } from "@/lib/calendly";
 import { consultationPriceDisplay } from "@/lib/consultation";
 import { siteConfig } from "@/lib/site-config";
 import type { LangProps } from "@/lib/types";
-
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
 
 const STRINGS = {
   ru: {
@@ -55,29 +45,9 @@ const STRINGS = {
 export default function ContactPage({ lang }: LangProps) {
   const t = STRINGS[lang];
 
-  const openCalendly = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: calendlyPopupUrl,
-      });
-    } else {
-      // Fallback — открываем в новой вкладке если виджет не загрузился
-      window.open(calendlyEventUrl, "_blank", "noopener");
-    }
-  };
-
   return (
     <>
-      {/* Calendly стили и скрипт */}
-      <link
-        rel="stylesheet"
-        href="https://assets.calendly.com/assets/external/widget.css"
-      />
-      <Script
-        src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="afterInteractive"
-      />
+      <CalendlyWidgetAssets />
 
       <Header lang={lang} />
       <main>
@@ -94,16 +64,10 @@ export default function ContactPage({ lang }: LangProps) {
               <p className="contact-hero-meta">{t.consultation}</p>
 
               <div className="contact-hero-buttons">
-                <a
-                  href={calendlyEventUrl}
-                  onClick={openCalendly}
-                  target="_blank"
-                  rel="noopener"
-                  className="contact-hero-btn"
-                >
+                <CalendlyBookingButton className="contact-hero-btn">
                   {t.bookCta}
                   <span className="arrow">→</span>
-                </a>
+                </CalendlyBookingButton>
               </div>
             </div>
           </div>

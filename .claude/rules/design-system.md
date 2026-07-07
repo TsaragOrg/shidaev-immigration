@@ -68,6 +68,13 @@ paths:
 | Background fix | `37-bg-fix.css` |
 | Intro overlay | `17-intro.css` |
 
+## Reusable behavior components
+
+| Что | TSX |
+|---|---|
+| Calendly widget assets | `src/components/booking/CalendlyWidgetAssets.tsx` |
+| Calendly popup CTA | `src/components/booking/CalendlyBookingButton.tsx` |
+
 
 ---
 
